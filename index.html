@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Follow the Slop</title>
+<meta name="description" content="The talking points are coordinated. The money is public record. Follow both. Money edges graded by their paper, script waves timestamped, 180s dated. Client-side only, no tracking.">
+<style>
+  :root{
+    --bg:#0a0c08; --panel:#11140d; --panel2:#181c12; --line:#2a3021;
+    --ink:#eef2e4; --ink2:#aab398; --faint:#6b755a;
+    --slop:#a8e04a; --amber:#e0b34a; --red:#e05a4a; --dim:#7a8567;
+    --mono:"SFMono-Regular",ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --headline:Haettenschweiler,"Arial Narrow Bold",Impact,"Franklin Gothic Medium",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--slop)}
+  .wrap{max-width:880px;margin:0 auto;padding:0 18px}
+  header{padding:34px 0 0;text-align:center}
+  header::after{content:"";display:block;height:4px;margin-top:18px;background:linear-gradient(90deg,var(--slop) 0 55%,var(--amber) 55% 80%,var(--red) 80% 100%)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+  h1{margin:.15em 0 .05em;font-size:52px;line-height:.95;font-family:var(--headline);font-weight:400;text-transform:uppercase;font-style:italic;color:var(--slop);text-shadow:0 0 22px rgba(168,224,74,.35)}
+  .tagline{color:var(--ink);font-size:17px;max-width:60ch;margin:12px auto 0;font-weight:600}
+  main{padding:14px 0 60px}
+  .premise{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--slop);border-radius:8px;padding:12px 15px;margin:16px 0;font-size:13.5px;color:var(--ink2)}
+  .gradekey{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
+  .gk{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:3px 11px;border:1px solid var(--line)}
+  .gk.documented{color:var(--slop);border-color:#4a5c2a;background:rgba(168,224,74,.08)}
+  .gk.reported{color:var(--amber);border-color:#5c4c2a;background:rgba(224,179,74,.08)}
+  .gk.claimed{color:var(--red);border-color:#5c342a;background:rgba(224,90,74,.08)}
+  .gk.open{color:var(--faint);border-style:dashed}
+  h2.section{font-size:14px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--slop);margin:34px 0 4px;border-bottom:1px solid var(--line);padding-bottom:8px;scroll-margin-top:70px}
+  .seclede{font-size:13px;color:var(--faint);margin:6px 0 12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
+  .edgehead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .edge{font-size:15.5px;font-weight:700}
+  .edge .arrow{color:var(--slop);padding:0 6px}
+  .badge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:2px 10px;border:1px solid var(--line);white-space:nowrap}
+  .badge.documented{color:var(--slop);border-color:#4a5c2a;background:rgba(168,224,74,.08)}
+  .badge.reported{color:var(--amber);border-color:#5c4c2a;background:rgba(224,179,74,.08)}
+  .badge.claimed{color:var(--red);border-color:#5c342a;background:rgba(224,90,74,.08)}
+  .badge.open{color:var(--faint);border-style:dashed}
+  .what{font-size:13.5px;color:var(--ink2);margin:8px 0}
+  .basis{font-family:var(--mono);font-size:11px;color:var(--faint);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+  .basis b{color:var(--ink2)}
+  .srcs{margin-top:6px;font-size:12px}
+  .srcs a{display:inline-block;margin:2px 10px 2px 0}
+  .wavedate{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.06em;text-transform:uppercase}
+  .toolbox{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+  .tool{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:7px;padding:7px 12px;background:var(--panel2);color:var(--ink);text-decoration:none}
+  .tool:hover{border-color:var(--slop)}
+  .nav{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:100;display:flex;border:2px solid #55603f;border-radius:999px;background:#0b0d08;box-shadow:0 0 0 4px #0b0d08,0 0 0 5px #333c26,0 10px 30px rgba(0,0,0,.9)}
+  @media (min-width:1400px){.nav{left:auto;right:20px;transform:none}}
+  .nav a{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;margin:3px;border-radius:999px;color:var(--ink2);text-decoration:none;border:1px solid transparent}
+  .nav a:hover{color:var(--slop);border-color:var(--slop)}
+  footer{border-top:1px solid var(--line);margin-top:34px;padding:18px 0 50px;color:var(--faint);font-size:12px}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="#money">The Money</a>
+  <a href="#waves">The Waves</a>
+  <a href="#turns">The 180s</a>
+</div>
+<header>
+  <div class="wrap">
+    <div class="kicker">receipts ★ grades ★ client-side ★ no tracking</div>
+    <h1>Follow the Slop</h1>
+    <p class="tagline" id="tagline"></p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="premise" id="premise"></div>
+  <div class="gradekey">
+    <span class="gk documented">documented — public record exists</span>
+    <span class="gk reported">reported — journalism / named source</span>
+    <span class="gk claimed">claimed — said on air, receipts not shown</span>
+    <span class="gk open">open — hole, receipts wanted</span>
+  </div>
+
+  <h2 class="section" id="money">The Money — who pays which mouth</h2>
+  <div class="seclede">Each edge is graded by its paper. Repeat a claim at its grade, never above it.</div>
+  <div id="moneyList"></div>
+
+  <h2 class="section" id="waves">The Waves — same script, many mouths, one afternoon</h2>
+  <div class="seclede">Coordination shows up in timing even when the money hides. Timestamp clusters against the news calendar are the empirical core of this site.</div>
+  <div id="waveList"></div>
+
+  <h2 class="section" id="turns">The 180s — dated pivots into the slop</h2>
+  <div class="seclede">A turn only counts here with before/after receipts: dated samples on both sides of the pivot, and any money edge in between. Entries stay OPEN until the receipts exist — that's the discipline.</div>
+  <div id="turnList"></div>
+
+  <h2 class="section">Check it yourself</h2>
+  <div class="seclede">The money databases are public. Every edge above should be re-derivable by you.</div>
+  <div class="toolbox" id="toolbox"></div>
+
+  <h2 class="section">Siblings</h2>
+  <div class="seclede">Where the records don't exist yet, the sibling sites draft the requests that force them into the open.</div>
+  <div class="toolbox" id="siblings"></div>
+</main>
+<footer><div class="wrap">Client-side only — nothing you type leaves your browser (there is nowhere to type), no analytics, no network calls. Every claim carries its grade; if you catch one above its grade, that's a bug — fork it and fix it. CC0.</div></footer>
+
+<script src="slop-data.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  const esc = s => (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  $("tagline").textContent = SLOP.meta.tagline;
+  $("premise").textContent = SLOP.meta.premise;
+
+  const srcs = list => list.length
+    ? `<div class="srcs">${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join("")}</div>`
+    : "";
+
+  $("moneyList").innerHTML = SLOP.money.map(m =>
+    `<div class="card">
+      <div class="edgehead"><span class="edge">${esc(m.payer)}<span class="arrow">→</span>${esc(m.mouth)}</span>
+      <span class="badge ${esc(m.grade)}">${esc(m.grade)}</span></div>
+      <div class="what">${esc(m.what)}</div>
+      <div class="basis"><b>Basis:</b> ${esc(m.basis)}${srcs(m.sources)}</div>
+    </div>`).join("");
+
+  $("waveList").innerHTML = SLOP.waves.map(w =>
+    `<div class="card">
+      <div class="edgehead"><span><span class="wavedate">${esc(w.date)}</span><br><span class="edge">${esc(w.script)}</span></span>
+      <span class="badge ${esc(w.grade)}">${esc(w.grade)}</span></div>
+      <div class="what">${esc(w.what)}</div>
+      <div class="basis"><b>Basis:</b> ${esc(w.basis)}${srcs(w.sources)}</div>
+    </div>`).join("");
+
+  $("turnList").innerHTML = SLOP.turns.map(t =>
+    `<div class="card">
+      <div class="edgehead"><span><span class="wavedate">${esc(t.when)}</span><br><span class="edge">${esc(t.who)}</span></span>
+      <span class="badge ${esc(t.grade)}">${esc(t.grade)}</span></div>
+      <div class="what">${esc(t.what)}</div>
+      <div class="basis"><b>To close it:</b> ${esc(t.basis)}${srcs(t.sources)}</div>
+    </div>`).join("");
+
+  $("toolbox").innerHTML = SLOP.meta.check_yourself.map(t => `<a class="tool" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)} ↗</a>`).join("");
+  $("siblings").innerHTML = SLOP.meta.siblings.map(t => `<a class="tool" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)} ↗</a>`).join("");
+</script>
+</body>
+</html>
