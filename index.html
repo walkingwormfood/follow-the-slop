@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Follow the Slop</title>
-<meta name="description" content="The talking points are coordinated. The money is public record. Follow both. The trough, the pipes, the mouths — every connection graded by its paper. Client-side only, no tracking.">
+<meta name="description" content="The talking points are coordinated. The money is public record. Follow both. The trough, the mouths, and a timeline that fires the script waves in sync. Client-side only, no tracking.">
 <style>
   :root{
     --bg:#0a0c08; --panel:#11140d; --panel2:#181c12; --line:#2a3021;
@@ -15,81 +15,99 @@
     --headline:Haettenschweiler,"Arial Narrow Bold",Impact,"Franklin Gothic Medium",sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
   a{color:var(--slop)}
-  .wrap{max-width:980px;margin:0 auto;padding:0 18px}
-  header{padding:34px 0 0;text-align:center}
-  header::after{content:"";display:block;height:4px;margin-top:18px;background:linear-gradient(90deg,var(--slop) 0 55%,var(--amber) 55% 80%,var(--red) 80% 100%)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 18px}
+  header{padding:30px 0 0;text-align:center}
+  header::after{content:"";display:block;height:4px;margin-top:16px;background:linear-gradient(90deg,var(--slop) 0 55%,var(--amber) 55% 80%,var(--red) 80% 100%)}
   .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
-  h1{margin:.15em 0 .05em;font-size:52px;line-height:.95;font-family:var(--headline);font-weight:400;text-transform:uppercase;font-style:italic;color:var(--slop);text-shadow:0 0 22px rgba(168,224,74,.35)}
-  .tagline{color:var(--ink);font-size:17px;max-width:60ch;margin:12px auto 0;font-weight:600}
-  main{padding:14px 0 60px}
-  .premise{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--slop);border-radius:8px;padding:12px 15px;margin:16px 0;font-size:13.5px;color:var(--ink2)}
-  .gradekey{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
-  .gk{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:3px 11px;border:1px solid var(--line)}
+  h1{margin:.12em 0 .05em;font-size:50px;line-height:.95;font-family:var(--headline);font-weight:400;text-transform:uppercase;font-style:italic;color:var(--slop);text-shadow:0 0 22px rgba(168,224,74,.35)}
+  .tagline{color:var(--ink);font-size:16.5px;max-width:62ch;margin:10px auto 0;font-weight:600}
+  main{padding:12px 0 60px}
+  .premise{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--slop);border-radius:8px;padding:11px 14px;margin:14px 0 10px;font-size:13px;color:var(--ink2)}
+  .gradekey{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}
+  .gk{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;border-radius:20px;padding:3px 10px;border:1px solid var(--line)}
   .gk.documented{color:var(--slop);border-color:#4a5c2a;background:rgba(168,224,74,.08)}
   .gk.reported{color:var(--amber);border-color:#5c4c2a;background:rgba(224,179,74,.08)}
   .gk.claimed{color:var(--red);border-color:#5c342a;background:rgba(224,90,74,.08)}
-  .gk.open{color:var(--faint);border-style:dashed}
-  h2.section{font-size:14px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--slop);margin:34px 0 4px;border-bottom:1px solid var(--line);padding-bottom:8px;scroll-margin-top:70px}
-  .seclede{font-size:13px;color:var(--faint);margin:6px 0 12px}
 
-  /* ——— the plumbing ——— */
-  #flow{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 14px 24px;margin:14px 0;overflow:hidden}
-  #flowSvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-  .tierlbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:2px 4px 8px;position:relative;z-index:2}
+  /* ——— the map ——— */
+  #map{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 12px 16px;overflow:hidden}
+  #wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .tierlbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:2px 6px 8px;position:relative;z-index:2}
   .tierlbl b{color:var(--ink2)}
-  .tier{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;margin-bottom:56px}
-  .tier:last-of-type{margin-bottom:4px}
-  .node{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-width:150px;max-width:220px;text-align:center;cursor:pointer;position:relative;z-index:2}
-  .node:hover{border-color:var(--slop)}
-  .node.sel{border-color:var(--slop);box-shadow:0 0 14px rgba(168,224,74,.35)}
-  .node .nm{font-weight:700;font-size:13.5px;line-height:1.3}
-  .node .sub{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:4px;line-height:1.4}
-  .node.trough{border-top:3px solid #55603f}
-  .node.mouth{border-bottom:3px solid #55603f}
-  .fpath{fill:none;stroke-width:2.2;opacity:.85;transition:opacity .15s}
-  .fpath.documented{stroke:var(--slop)}
-  .fpath.reported{stroke:var(--amber)}
-  .fpath.claimed{stroke:var(--red);stroke-dasharray:7 5}
-  .fpath.open{stroke:var(--faint);stroke-dasharray:3 5}
-  .fpath.dimmed{opacity:.14}
-  .fpath.hot{stroke-width:3.6;opacity:1;filter:drop-shadow(0 0 5px rgba(168,224,74,.5))}
-  .fhit{fill:none;stroke:transparent;stroke-width:16;pointer-events:stroke;cursor:pointer}
-  #flowHint{font-family:var(--mono);font-size:10.5px;color:var(--faint);text-align:center;margin-top:2px;position:relative;z-index:2}
+  #trough{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;margin-bottom:64px}
+  .org{background:var(--panel2);border:1px solid var(--line);border-top:3px solid #55603f;border-radius:10px;padding:9px 13px;min-width:150px;max-width:210px;text-align:center;cursor:pointer;position:relative;z-index:2}
+  .org:hover,.org.sel{border-color:var(--slop);box-shadow:0 0 14px rgba(168,224,74,.3)}
+  .org .nm{font-weight:700;font-size:13px;line-height:1.25}
+  .org .sub{font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:3px;line-height:1.4}
 
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0}
-  .card.flash{border-color:var(--slop);box-shadow:0 0 18px rgba(168,224,74,.3)}
-  .edgehead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
-  .edge{font-size:15.5px;font-weight:700}
-  .edge .arrow{color:var(--slop);padding:0 6px}
-  .badge{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:2px 10px;border:1px solid var(--line);white-space:nowrap}
-  .badge.documented{color:var(--slop);border-color:#4a5c2a;background:rgba(168,224,74,.08)}
-  .badge.reported{color:var(--amber);border-color:#5c4c2a;background:rgba(224,179,74,.08)}
-  .badge.claimed{color:var(--red);border-color:#5c342a;background:rgba(224,90,74,.08)}
-  .badge.open{color:var(--faint);border-style:dashed}
-  .what{font-size:13.5px;color:var(--ink2);margin:8px 0}
-  .basis{font-family:var(--mono);font-size:11px;color:var(--faint);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
-  .basis b{color:var(--ink2)}
-  .srcs{margin-top:6px;font-size:12px}
-  .srcs a{display:inline-block;margin:2px 10px 2px 0}
-  .wavedate{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.06em;text-transform:uppercase}
+  #wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px;position:relative;z-index:2}
+  .poster{position:relative;background:#0e1109;border:1px solid #39422a;border-radius:6px;padding:10px 10px 12px;text-align:center;cursor:pointer;box-shadow:inset 0 0 30px rgba(0,0,0,.5)}
+  .poster::before{content:"( UN ) WANTED";display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.3em;color:var(--faint);margin-bottom:6px}
+  .poster:hover,.poster.sel{border-color:var(--slop)}
+  .mug{height:74px;margin:0 auto 8px;width:74px;position:relative;border-radius:4px;background:repeating-linear-gradient(0deg,#141810 0 3px,#0e1109 3px 6px);overflow:hidden;border:1px solid #2a3021}
+  .mug::before{content:"";position:absolute;left:50%;top:12px;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;background:#39422a}
+  .mug::after{content:"";position:absolute;left:50%;top:40px;transform:translateX(-50%);width:48px;height:30px;border-radius:12px 12px 0 0;background:#39422a}
+  .poster .nm{font-family:var(--headline);font-style:italic;font-size:19px;letter-spacing:.03em;line-height:1;color:var(--ink)}
+  .poster .outlet{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:4px;line-height:1.4;text-transform:uppercase;letter-spacing:.04em}
+  .poster .stamp{position:absolute;top:44px;left:50%;transform:translateX(-50%) rotate(-11deg);font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;padding:2px 6px;border:2px solid var(--amber);color:var(--amber);background:rgba(10,12,8,.85);border-radius:3px;opacity:0;transition:opacity .25s;white-space:nowrap;z-index:3;max-width:150px;white-space:normal}
+  .poster .stamp.documented{border-color:var(--slop);color:var(--slop)}
+  .poster .stamp.claimed{border-color:var(--red);color:var(--red);border-style:dashed}
+  .poster.funded .stamp{opacity:1}
+  .poster.dimmed{opacity:.3}
+  .bubble{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:170px;background:#131a0c;border:1px solid var(--slop);border-radius:8px;padding:6px 8px;font-size:10.5px;color:var(--slop);opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
+  .bubble::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--slop)}
+  .poster.spewing{border-color:var(--slop);animation:spew 1.1s ease-out infinite}
+  .poster.spewing .bubble{opacity:1}
+  @keyframes spew{0%{box-shadow:inset 0 0 30px rgba(0,0,0,.5),0 0 0 0 rgba(168,224,74,.55)}100%{box-shadow:inset 0 0 30px rgba(0,0,0,.5),0 0 0 26px rgba(168,224,74,0)}}
+  @media (prefers-reduced-motion: reduce){.poster.spewing{animation:none;box-shadow:inset 0 0 30px rgba(0,0,0,.5),0 0 18px rgba(168,224,74,.55)}}
+  .wire{fill:none;stroke-width:2;opacity:.22;transition:opacity .15s,stroke-width .15s}
+  .wire.documented{stroke:var(--slop)}
+  .wire.reported{stroke:var(--amber)}
+  .wire.claimed{stroke:var(--red);stroke-dasharray:7 5}
+  .wire.hot{opacity:1;stroke-width:3.4;filter:drop-shadow(0 0 5px rgba(168,224,74,.45))}
+  .wire.faded{opacity:.06}
+
+  .rap{position:fixed;z-index:200;max-width:340px;background:#10140b;border:1px solid var(--slop);border-radius:10px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.85);display:none}
+  .rap.show{display:block}
+  .rap .rn{font-family:var(--headline);font-style:italic;font-size:20px;color:var(--slop)}
+  .rap .charge{font-size:12.5px;color:var(--ink2);margin:6px 0}
+  .rap .line{font-family:var(--mono);font-size:11px;margin:7px 0;border-top:1px dashed var(--line);padding-top:7px}
+  .rap .line a{display:inline-block;margin:2px 8px 0 0;font-size:11px}
+  .rap .close{position:absolute;top:6px;right:10px;background:none;border:none;color:var(--faint);cursor:pointer;font-size:14px}
+
+  /* ——— the timeline ——— */
+  #timebar{position:relative;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px 10px;margin:14px 0}
+  .timerow{display:flex;align-items:center;gap:12px}
+  #playBtn{font-family:var(--mono);font-size:13px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--slop);cursor:pointer;padding:6px 12px;white-space:nowrap}
+  #playBtn:hover{border-color:var(--slop)}
+  #dateOut{font-family:var(--mono);font-size:14px;color:var(--ink);min-width:118px;text-align:center;font-weight:700}
+  .railwrap{flex:1;position:relative;padding:8px 0}
+  #rail{width:100%;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;background:linear-gradient(90deg,#39422a,#55603f);outline:none;position:relative;z-index:2}
+  #rail::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--slop);border:3px solid #0a0c08;box-shadow:0 0 10px rgba(168,224,74,.6);cursor:pointer}
+  #rail::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--slop);border:3px solid #0a0c08;cursor:pointer}
+  .tick{position:absolute;top:50%;width:8px;height:8px;border-radius:50%;transform:translate(-50%,-50%);cursor:pointer;z-index:1}
+  .tick.wave{background:var(--slop);box-shadow:0 0 8px rgba(168,224,74,.7)}
+  .tick.money{background:var(--amber)}
+  .tick.marker{background:var(--faint)}
+  #banner{min-height:52px;margin-top:10px;font-size:13px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:9px}
+  #banner .blabel{color:var(--ink)}
+  #banner .btag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);border-radius:20px;padding:1px 8px;margin-right:8px}
+  #banner .btag.wave{color:var(--slop);border-color:#4a5c2a}
+  #banner .btag.money{color:var(--amber);border-color:#5c4c2a}
+  #banner .btag.marker{color:var(--faint)}
+  #banner a{margin-right:10px;font-size:12px}
+
+  h2.section{font-size:13px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--slop);margin:30px 0 4px;border-bottom:1px solid var(--line);padding-bottom:7px}
+  .seclede{font-size:12.5px;color:var(--faint);margin:6px 0 10px}
   .toolbox{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
   .tool{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:7px;padding:7px 12px;background:var(--panel2);color:var(--ink);text-decoration:none}
   .tool:hover{border-color:var(--slop)}
-  .nav{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:100;display:flex;border:2px solid #55603f;border-radius:999px;background:#0b0d08;box-shadow:0 0 0 4px #0b0d08,0 0 0 5px #333c26,0 10px 30px rgba(0,0,0,.9)}
-  @media (min-width:1400px){.nav{left:auto;right:20px;transform:none}}
-  .nav a{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;margin:3px;border-radius:999px;color:var(--ink2);text-decoration:none;border:1px solid transparent}
-  .nav a:hover{color:var(--slop);border-color:var(--slop)}
-  footer{border-top:1px solid var(--line);margin-top:34px;padding:18px 0 50px;color:var(--faint);font-size:12px}
+  footer{border-top:1px solid var(--line);margin-top:30px;padding:16px 0 50px;color:var(--faint);font-size:12px}
 </style>
 </head>
 <body>
-<div class="nav">
-  <a href="#money">The Flow</a>
-  <a href="#waves">The Waves</a>
-  <a href="#turns">The 180s</a>
-</div>
 <header>
   <div class="wrap">
     <div class="kicker">receipts ★ grades ★ client-side ★ no tracking</div>
@@ -100,46 +118,39 @@
 <main class="wrap">
   <div class="premise" id="premise"></div>
   <div class="gradekey">
-    <span class="gk documented">documented — public record exists</span>
-    <span class="gk reported">reported — journalism / named source</span>
-    <span class="gk claimed">claimed — said on air, receipts not shown</span>
-    <span class="gk open">open — hole, receipts wanted</span>
+    <span class="gk documented">solid green — documented, public record</span>
+    <span class="gk reported">amber — reported</span>
+    <span class="gk claimed">dashed red — claimed on air, receipts not shown</span>
   </div>
 
-  <h2 class="section" id="money">The Flow — trough → pipes → mouths</h2>
-  <div class="seclede">Slop flows downhill. Solid green lines are on paper (public record); amber is reported; dashed red was said on air and never shown. Click a line or a tile.</div>
-  <div id="flow">
-    <svg id="flowSvg" xmlns="http://www.w3.org/2000/svg"></svg>
-    <div class="tierlbl"><b>THE TROUGH</b> — who fills it</div>
-    <div class="tier" id="tier-trough"></div>
-    <div class="tierlbl"><b>THE PIPES</b> — who it runs through</div>
-    <div class="tier" id="tier-pipe"></div>
-    <div class="tierlbl"><b>THE MOUTHS</b> — who serves it</div>
-    <div class="tier" id="tier-mouth"></div>
-    <div id="flowHint">click a line for its receipt · click a tile to trace its plumbing</div>
+  <div id="map">
+    <svg id="wires" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="tierlbl"><b>THE TROUGH</b> — who fills it · hover or click to trace the plumbing</div>
+    <div id="trough"></div>
+    <div class="tierlbl"><b>THE MOUTHS</b> — who serves it · click a poster for the rap sheet &amp; sources</div>
+    <div id="wall"></div>
   </div>
 
-  <h2 class="section" id="receipts">The Receipts — the paper behind the picture</h2>
-  <div class="seclede">Each connection above is graded by exactly what's below. Repeat a claim at its grade, never above it.</div>
-  <div id="moneyList"></div>
+  <div id="timebar">
+    <div class="timerow">
+      <button id="playBtn">▶ play</button>
+      <div class="railwrap" id="railwrap"><input type="range" id="rail" min="0" value="0" step="1"></div>
+      <div id="dateOut"></div>
+    </div>
+    <div id="banner"></div>
+  </div>
 
-  <h2 class="section" id="waves">The Waves — same script, many mouths, one afternoon</h2>
-  <div class="seclede">Coordination shows up in timing even when the money hides. Timestamp clusters against the news calendar are the empirical core of this site.</div>
-  <div id="waveList"></div>
-
-  <h2 class="section" id="turns">The 180s — dated pivots into the slop</h2>
-  <div class="seclede">A turn only counts here with before/after receipts: dated samples on both sides of the pivot, and any money edge in between. Entries stay OPEN until the receipts exist — that's the discipline.</div>
-  <div id="turnList"></div>
+  <div class="rap" id="rap"><button class="close" id="rapClose">✕</button><div id="rapBody"></div></div>
 
   <h2 class="section">Check it yourself</h2>
-  <div class="seclede">The money databases are public. Every edge above should be re-derivable by you.</div>
+  <div class="seclede">The money databases are public. Every wire above should be re-derivable by you.</div>
   <div class="toolbox" id="toolbox"></div>
 
   <h2 class="section">Siblings</h2>
   <div class="seclede">Where the records don't exist yet, the sibling sites draft the requests that force them into the open.</div>
   <div class="toolbox" id="siblings"></div>
 </main>
-<footer><div class="wrap">Client-side only — nothing you type leaves your browser (there is nowhere to type), no analytics, no network calls. Every claim carries its grade; if you catch one above its grade, that's a bug — fork it and fix it. CC0.</div></footer>
+<footer><div class="wrap">Client-side only — nothing you type leaves your browser (there is nowhere to type), no analytics, no network calls. Every wire and every event carries its grade; repeat a claim at its grade, never above it. If you catch one above its grade, that's a bug — fork it and fix it. CC0.</div></footer>
 
 <script src="slop-data.js"></script>
 <script>
@@ -148,106 +159,147 @@
   $("tagline").textContent = SLOP.meta.tagline;
   $("premise").textContent = SLOP.meta.premise;
 
-  /* ——— the plumbing: tiles in tiers, connectors drawn from real positions ——— */
-  const nodeEl = {};
-  SLOP.nodes.forEach(n => {
+  /* ——— build the map ——— */
+  const orgEl = {}, posterEl = {};
+  SLOP.troughs.forEach(t => {
     const d = document.createElement("div");
-    d.className = "node " + n.tier;
-    d.dataset.id = n.id;
-    d.innerHTML = `<div class="nm">${esc(n.name)}</div><div class="sub">${esc(n.sub)}</div>`;
-    $("tier-" + n.tier).appendChild(d);
-    nodeEl[n.id] = d;
+    d.className = "org"; d.dataset.id = t.id;
+    d.innerHTML = `<div class="nm">${esc(t.name)}</div><div class="sub">${esc(t.sub)}</div>`;
+    $("trough").appendChild(d); orgEl[t.id] = d;
+  });
+  SLOP.posters.forEach(p => {
+    const d = document.createElement("div");
+    d.className = "poster"; d.dataset.id = p.id;
+    const edge = SLOP.edges.find(e => e.poster === p.id);
+    d.innerHTML = `<div class="bubble"></div><div class="mug"></div>` +
+      (edge ? `<div class="stamp ${esc(edge.grade)}">${esc(edge.stamp)}</div>` : "") +
+      `<div class="nm">${esc(p.name)}</div><div class="outlet">${esc(p.outlet)}</div>`;
+    $("wall").appendChild(d); posterEl[p.id] = d;
   });
 
   const NS = "http://www.w3.org/2000/svg";
-  const svg = $("flowSvg");
-  const pathEls = [], hitEls = [];
-  SLOP.flows.forEach(f => {
-    const p = document.createElementNS(NS, "path");
-    p.setAttribute("class", "fpath " + f.grade);
-    svg.appendChild(p); pathEls.push(p);
-    const h = document.createElementNS(NS, "path");
-    h.setAttribute("class", "fhit");
-    h.dataset.ref = f.ref;
-    h.dataset.from = f.from; h.dataset.to = f.to;
-    svg.appendChild(h); hitEls.push(h);
+  const wires = [];
+  SLOP.edges.forEach(e => {
+    const w = document.createElementNS(NS, "path");
+    w.setAttribute("class", "wire " + e.grade);
+    $("wires").appendChild(w);
+    wires.push({ el: w, e });
   });
-
-  function drawFlows(){
-    const box = $("flow").getBoundingClientRect();
-    svg.setAttribute("viewBox", "0 0 " + box.width + " " + box.height);
-    SLOP.flows.forEach((f, i) => {
-      const a = nodeEl[f.from].getBoundingClientRect();
-      const b = nodeEl[f.to].getBoundingClientRect();
+  function drawWires(){
+    const box = $("map").getBoundingClientRect();
+    $("wires").setAttribute("viewBox", "0 0 " + box.width + " " + box.height);
+    wires.forEach(({ el, e }) => {
+      const a = orgEl[e.trough].getBoundingClientRect();
+      const b = posterEl[e.poster].getBoundingClientRect();
       const x1 = a.left + a.width/2 - box.left, y1 = a.bottom - box.top;
       const x2 = b.left + b.width/2 - box.left, y2 = b.top - box.top;
-      const bend = Math.max(24, (y2 - y1) * 0.45);
-      const d = `M ${x1} ${y1} C ${x1} ${y1 + bend}, ${x2} ${y2 - bend}, ${x2} ${y2}`;
-      pathEls[i].setAttribute("d", d);
-      hitEls[i].setAttribute("d", d);
+      const bend = Math.max(26, (y2 - y1) * 0.45);
+      el.setAttribute("d", `M ${x1} ${y1} C ${x1} ${y1 + bend}, ${x2} ${y2 - bend}, ${x2} ${y2}`);
     });
   }
-  window.addEventListener("resize", drawFlows);
-  window.addEventListener("load", drawFlows);
-  drawFlows();
+  window.addEventListener("resize", drawWires);
+  window.addEventListener("load", drawWires);
+  drawWires();
 
-  let selNode = null;
-  function clearSel(){
-    selNode = null;
-    Object.values(nodeEl).forEach(el => el.classList.remove("sel"));
-    pathEls.forEach(p => p.classList.remove("dimmed", "hot"));
-  }
-  function selectNode(id){
-    if(selNode === id){ clearSel(); return; }
-    clearSel(); selNode = id;
-    nodeEl[id].classList.add("sel");
-    SLOP.flows.forEach((f, i) => {
-      const touches = f.from === id || f.to === id;
-      pathEls[i].classList.toggle("hot", touches);
-      pathEls[i].classList.toggle("dimmed", !touches);
+  /* trace the plumbing on hover/click */
+  let lockedOrg = null;
+  function trace(orgId){
+    wires.forEach(({ el, e }) => {
+      el.classList.toggle("hot", !!orgId && e.trough === orgId);
+      el.classList.toggle("faded", !!orgId && e.trough !== orgId);
     });
+    Object.entries(posterEl).forEach(([pid, el]) => {
+      const touched = !orgId || SLOP.edges.some(e => e.trough === orgId && e.poster === pid);
+      el.classList.toggle("dimmed", !!orgId && !touched);
+    });
+    Object.entries(orgEl).forEach(([oid, el]) => el.classList.toggle("sel", oid === orgId));
   }
-  $("flow").addEventListener("click", e => {
-    const n = e.target.closest(".node");
-    if(n){ selectNode(n.dataset.id); return; }
-  });
-  svg.addEventListener("click", e => {
-    const h = e.target.closest(".fhit"); if(!h) return;
-    const card = document.getElementById("receipt-" + h.dataset.ref);
-    if(card){
-      card.scrollIntoView({ block: "start" });
-      card.classList.add("flash"); setTimeout(() => card.classList.remove("flash"), 2200);
-    }
+  Object.entries(orgEl).forEach(([oid, el]) => {
+    el.addEventListener("mouseenter", () => { if(!lockedOrg) trace(oid); });
+    el.addEventListener("mouseleave", () => { if(!lockedOrg) trace(null); });
+    el.addEventListener("click", () => { lockedOrg = lockedOrg === oid ? null : oid; trace(lockedOrg); });
   });
 
-  /* ——— receipts / waves / turns ——— */
-  const srcs = list => list.length
-    ? `<div class="srcs">${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join("")}</div>`
-    : "";
+  /* rap sheet popover */
+  function showRap(pid, anchor){
+    const p = SLOP.posters.find(x => x.id === pid);
+    const lines = [];
+    SLOP.edges.filter(e => e.poster === pid).forEach(e => lines.push({ grade: e.grade, text: e.note, sources: e.sources }));
+    SLOP.events.filter(ev => (ev.riders||[]).includes(pid)).forEach(ev => lines.push({ grade: ev.grade, text: ev.label, sources: ev.sources }));
+    $("rapBody").innerHTML = `<div class="rn">${esc(p.name)}</div><div class="charge">${esc(p.charge)}</div>` +
+      lines.map(l => `<div class="line"><span class="gk ${esc(l.grade)}">${esc(l.grade)}</span> ${esc(l.text)}<br>` +
+        (l.sources||[]).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join("") + `</div>`).join("");
+    const r = anchor.getBoundingClientRect();
+    const rap = $("rap");
+    rap.classList.add("show");
+    const top = Math.min(window.innerHeight - 60, r.bottom + 8);
+    rap.style.top = top + "px";
+    rap.style.left = Math.max(8, Math.min(window.innerWidth - 356, r.left)) + "px";
+  }
+  $("rapClose").addEventListener("click", () => $("rap").classList.remove("show"));
+  document.addEventListener("click", e => {
+    const pos = e.target.closest(".poster");
+    if(pos){ showRap(pos.dataset.id, pos); return; }
+    if(!e.target.closest(".rap")) $("rap").classList.remove("show");
+  });
 
-  $("moneyList").innerHTML = SLOP.money.map(m =>
-    `<div class="card" id="receipt-${esc(m.id)}">
-      <div class="edgehead"><span class="edge">${esc(m.payer)}<span class="arrow">→</span>${esc(m.mouth)}</span>
-      <span class="badge ${esc(m.grade)}">${esc(m.grade)}</span></div>
-      <div class="what">${esc(m.what)}</div>
-      <div class="basis"><b>Basis:</b> ${esc(m.basis)}${srcs(m.sources)}</div>
-    </div>`).join("");
+  /* ——— the timeline ——— */
+  const DAY = 86400000;
+  const epoch = new Date(SLOP.meta.epoch + "T00:00:00Z").getTime();
+  const today = Date.now();
+  const totalDays = Math.max(1, Math.round((today - epoch) / DAY));
+  const rail = $("rail");
+  rail.max = totalDays;
+  const evDay = ev => Math.round((new Date(ev.date + "T00:00:00Z").getTime() - epoch) / DAY);
+  const fmt = d => new Date(epoch + d * DAY).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 
-  $("waveList").innerHTML = SLOP.waves.map(w =>
-    `<div class="card">
-      <div class="edgehead"><span><span class="wavedate">${esc(w.date)}</span><br><span class="edge">${esc(w.script)}</span></span>
-      <span class="badge ${esc(w.grade)}">${esc(w.grade)}</span></div>
-      <div class="what">${esc(w.what)}</div>
-      <div class="basis"><b>Basis:</b> ${esc(w.basis)}${srcs(w.sources)}</div>
-    </div>`).join("");
+  /* event ticks on the rail */
+  SLOP.events.forEach(ev => {
+    const t = document.createElement("div");
+    t.className = "tick " + ev.type;
+    t.style.left = (evDay(ev) / totalDays * 100) + "%";
+    t.title = ev.date + " — " + ev.label.slice(0, 90);
+    t.addEventListener("click", () => { rail.value = evDay(ev); update(); });
+    $("railwrap").appendChild(t);
+  });
 
-  $("turnList").innerHTML = SLOP.turns.map(t =>
-    `<div class="card">
-      <div class="edgehead"><span><span class="wavedate">${esc(t.when)}</span><br><span class="edge">${esc(t.who)}</span></span>
-      <span class="badge ${esc(t.grade)}">${esc(t.grade)}</span></div>
-      <div class="what">${esc(t.what)}</div>
-      <div class="basis"><b>To close it:</b> ${esc(t.basis)}${srcs(t.sources)}</div>
-    </div>`).join("");
+  const srcLinks = list => (list||[]).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join("");
+
+  function update(){
+    const d = +rail.value;
+    $("dateOut").textContent = fmt(d);
+    /* money stamps land when their date passes */
+    SLOP.edges.forEach(e => posterEl[e.poster].classList.toggle("funded", evDay(e) <= d));
+    /* waves fire in a window around their date */
+    const active = SLOP.events.filter(ev => ev.type === "wave" && d >= evDay(ev) && d <= evDay(ev) + 4);
+    Object.values(posterEl).forEach(el => el.classList.remove("spewing"));
+    active.forEach(ev => (ev.riders||[]).forEach(pid => {
+      const el = posterEl[pid]; if(!el) return;
+      el.classList.add("spewing");
+      el.querySelector(".bubble").textContent = ev.script || "";
+    }));
+    /* banner: the nearest event at or before the playhead */
+    const passed = SLOP.events.filter(ev => evDay(ev) <= d);
+    const cur = passed[passed.length - 1];
+    $("banner").innerHTML = cur
+      ? `<span class="btag ${esc(cur.type)}">${esc(cur.type)}</span><span class="blabel">${esc(cur.date)} — ${esc(cur.label)}</span><div>${srcLinks(cur.sources)}</div>`
+      : `<span class="blabel">Drag toward the first tick — or press play and watch the machine assemble itself.</span>`;
+  }
+  rail.addEventListener("input", update);
+
+  /* play: scrub history at ~3 days per tick */
+  let timer = null;
+  $("playBtn").addEventListener("click", () => {
+    if(timer){ clearInterval(timer); timer = null; $("playBtn").textContent = "▶ play"; return; }
+    if(+rail.value >= totalDays - 1) rail.value = 0;
+    $("playBtn").textContent = "❚❚ pause";
+    timer = setInterval(() => {
+      rail.value = Math.min(totalDays, +rail.value + 3);
+      update();
+      if(+rail.value >= totalDays){ clearInterval(timer); timer = null; $("playBtn").textContent = "▶ play"; }
+    }, 90);
+  });
+  update();
 
   $("toolbox").innerHTML = SLOP.meta.check_yourself.map(t => `<a class="tool" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)} ↗</a>`).join("");
   $("siblings").innerHTML = SLOP.meta.siblings.map(t => `<a class="tool" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)} ↗</a>`).join("");
