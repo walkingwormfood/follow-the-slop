@@ -48,7 +48,7 @@ const SLOP = {
     { id: "kolvet",    name: "Andrew Kolvet",   outlet: "The Charlie Kirk Show (Salem)",
       charge: "co-hosts the dead man's show inside the foreign agent's contract scope — and rides the waves: kindness, unison, “it's over”" },
     { id: "neff",      name: "Blake Neff",      outlet: "The Charlie Kirk Show (Salem)",
-      charge: "rode the day-one-of-prelim move on Candace — “all the gloves came off in unison,” as characterized on air" },
+      charge: "rode the day-one-of-prelim move on Candace — “all the gloves came off in unison,” as characterized on air. Then, on a recorded Twitter Space, about the unnamed TPUSA rep who met Robinson the morning of the shooting: “even if I did [know], I wouldn't tell you… and I know that that person didn't do anything” — you can't know that about someone you don't know" },
     { id: "marlow",    name: "Alex Marlow",     outlet: "Breitbart · Salem radio",
       charge: "handed Kirk's radio slot, live Jan 5, 2026" },
     { id: "jennings",  name: "Scott Jennings",  outlet: "CNN · Salem radio",
