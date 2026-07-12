@@ -220,11 +220,12 @@
       const r = el.getBoundingClientRect();
       anchor[id] = (r.left + r.width/2 - map.left) / map.width * 100;
     });
-    const OPEN = 82;   // open-water anchor (percent) for mouths with no money edge yet
     const groups = {};
+    const open = [];   // no money edge drawn yet: deeper water, murkier money
     SLOP.posters.forEach(p => {
       const es = SLOP.edges.filter(e => e.poster === p.id);
-      const ax = es.length ? es.reduce((s, e) => s + anchor[e.trough], 0) / es.length : OPEN;
+      if(!es.length){ open.push(p.id); return; }
+      const ax = es.reduce((s, e) => s + anchor[e.trough], 0) / es.length;
       const key = Math.round(ax * 10) / 10;
       (groups[key] = groups[key] || []).push(p.id);
     });
@@ -240,7 +241,19 @@
         maxY = Math.max(maxY, y);
       });
     });
-    $("sea").style.height = (maxY + 130) + "px";
+    const PERROW = 6;
+    open.forEach((id, i) => {
+      const row = Math.floor(i / PERROW);
+      const n = Math.min(PERROW, open.length - row * PERROW);
+      const col = i % PERROW;
+      const x = n === 1 ? 50 : 10 + col * (80 / (n - 1));
+      const y = maxY + 120 + row * 122;
+      const el = shillEl[id];
+      el.style.left = x + "%";
+      el.style.top = y + "px";
+    });
+    const rows = Math.ceil(open.length / PERROW);
+    $("sea").style.height = (maxY + (open.length ? 120 + (rows - 1) * 122 : 0) + 132) + "px";
     drawWires();
   }
   function drawWires(){
