@@ -1,21 +1,21 @@
 /* Follow the Slop — data
  * Pure data, no dependencies. Drives index.html.
  * THE DISCIPLINE: every edge and event carries a grade, and the grade is the product.
- *   documented — a public record exists (FARA filing, contract, press release)
+ *   documented — a public record exists (FARA filing, contract, press release, timestamped posts shown)
  *   reported   — journalism or a named source; the record itself not in hand
  *   claimed    — somebody said it on air; receipts not shown
  * Repeat a claim at its grade, never above it.
  *
- * THE PICTURE: the trough (orgs, top) feeds the mouths (posters, below).
- * The timeline runs 2025-09-10 → today: money stamps land on posters as their
- * funding dates pass; waves make every rider spew the same script at once —
- * the simultaneity IS the evidence.
+ * THE PICTURE: the slop FALLS, then RADIATES. Money enters at the top and descends
+ * through the org tiers (depth = money distance from the source); the mouths hang at
+ * the bottom of their chains; waves blip outward from the mouths as the timeline
+ * crosses their dates. The matrix below counts who rides what.
  */
 const SLOP = {
   meta: {
     product: "Follow the Slop",
     tagline: "The talking points are coordinated. The money is public record. Follow both.",
-    premise: "When the same script comes out of twenty mouths in one afternoon, that's not a vibe — that's logistics. Logistics cost money, and money leaves records. Above: who fills the trough. Below: who serves it. Drag the timeline and watch the money land and the scripts fire in waves — the timing is the tell, even when the money hides.",
+    premise: "When the same script comes out of eight mouths in two hours, that's not a vibe — that's logistics. Logistics cost money, and money leaves records. On the map, money falls: each tier sits below whatever funds it, so depth IS money-distance. The mouths hang at the bottom of their chains, and script waves radiate out of them as the timeline crosses each firing date. Hover anything to light its full plumbing, top to bottom. The matrix underneath counts repeat riders — the number no single screenshot can show.",
     epoch: "2025-09-10",
     check_yourself: [
       { label: "FARA — foreign-agent filings (DOJ)", url: "https://efile.fara.gov/ords/fara/f?p=1381:1" },
@@ -29,21 +29,26 @@ const SLOP = {
     ]
   },
 
-  /* ——— THE TROUGH: who fills it ——— */
-  troughs: [
-    { id: "israel",     name: "Government of Israel", short: "ISRAEL MFA", sub: "MFA · via Havas Media Germany · FARA #7649" },
-    { id: "salem",      name: "Salem Media Network",  short: "SALEM", sub: "distribution · Parscale as CSO (reported)" },
-    { id: "tpusa",      name: "Turning Point USA",    short: "TPUSA", sub: "post-assassination payroll" },
-    { id: "dod",        name: "U.S. Dept of Defense", short: "DOD", sub: "digital-media consulting money" },
-    { id: "foundation", name: "“a foundation”",       short: "???", sub: "named on air, never produced" }
+  /* ——— ORGS: tiles. Depth on the map is computed from the money edges. ——— */
+  orgs: [
+    { id: "israel",     name: "Government of Israel", sub: "Ministry of Foreign Affairs" },
+    { id: "dod",        name: "U.S. Dept of Defense", sub: "digital-media consulting money" },
+    { id: "tpusa",      name: "Turning Point USA",    sub: "post-assassination payroll" },
+    { id: "foundation", name: "“a foundation”",       sub: "named on air, never produced" },
+    { id: "havas",      name: "Havas Media Germany",  sub: "contracting intermediary" },
+    { id: "clocktower", name: "Clock Tower X LLC",    sub: "FARA #7649 · registered Sept 18, 2025" },
+    { id: "salem",      name: "Salem Media Network",  sub: "distribution · Parscale as CSO (reported)" },
+    { id: "kirkshow",   name: "The Charlie Kirk Show", sub: "Salem Podcast Network" }
   ],
 
-  /* ——— THE WALL: (un)wanted posters ——— */
-  posters: [
-    { id: "parscale",  name: "Brad Parscale",   outlet: "Clock Tower X · Salem CSO",
+  /* ——— PEOPLE: circles. mugs/<id>.jpg gives them a face; initials otherwise. ——— */
+  people: [
+    { id: "parscale",  name: "Brad Parscale",   outlet: "Clock Tower X owner · Salem CSO",
       charge: "registered foreign agent of Israel — $1.5M/month, eight days after the killing" },
     { id: "kolvet",    name: "Andrew Kolvet",   outlet: "The Charlie Kirk Show (Salem)",
-      charge: "co-hosts the dead man's show inside the foreign agent's contract scope" },
+      charge: "co-hosts the dead man's show inside the foreign agent's contract scope — and rides the waves: kindness, unison, “it's over”" },
+    { id: "neff",      name: "Blake Neff",      outlet: "The Charlie Kirk Show (Salem)",
+      charge: "rode the day-one-of-prelim move on Candace — “all the gloves came off in unison,” as characterized on air" },
     { id: "marlow",    name: "Alex Marlow",     outlet: "Breitbart · Salem radio",
       charge: "handed Kirk's radio slot, live Jan 5, 2026" },
     { id: "jennings",  name: "Scott Jennings",  outlet: "CNN · Salem radio",
@@ -51,9 +56,9 @@ const SLOP = {
     { id: "wilson",    name: "Andrew Wilson",   outlet: "debate circuit → TPUSA",
       charge: "paid to defend the org he spent years attacking, per his own statement" },
     { id: "allen",     name: "Graham Allen",    outlet: "podcast",
-      charge: "ex-Pentagon “senior strategic consultant for digital media,” now official-narrative artillery" },
+      charge: "ex-Pentagon “senior strategic consultant for digital media” — rode the “it's over” wave: “The zoomed in video shows him taking the shot.”" },
     { id: "posobiec",  name: "Jack Posobiec",   outlet: "Human Events · TPUSA orbit",
-      charge: "kindness-wave rider — same script, same day" },
+      charge: "kindness-wave and “it's over”-wave rider — “You can see him take the shot”" },
     { id: "philip",    name: "Danny Philip",    outlet: "TPUSA orbit",
       charge: "kindness-wave rider — same script, same day" },
     { id: "musk",      name: "Elon Musk",       outlet: "X (owner)",
@@ -68,54 +73,80 @@ const SLOP = {
       charge: "the excommunication speech — “charlatans who traffic in conspiracism”" },
     { id: "pool",      name: "Tim Pool",        outlet: "Timcast",
       charge: "branded the questioners “evil”" },
-    { id: "neff",      name: "Blake Neff",      outlet: "The Charlie Kirk Show (Salem)",
-      charge: "rode the day-one-of-prelim move on Candace — “all the gloves came off in unison,” as characterized on air" },
     { id: "terrell",   name: "Leo Terrell",     outlet: "DOJ antisemitism task force",
       charge: "called for retweet pile-ons to make a teenager “permanently unemployable” — his own posts, read on air" },
     { id: "lonsdale",  name: "Joe Lonsdale",    outlet: "8VC · Cicero Institute",
       charge: "“be a strong Jew… dox him” — timestamped June 8, 1:30 p.m." },
     { id: "foxnews",   name: "Fox News",        outlet: "cable",
       charge: "six segments in one day on one teenager's private email" },
+    { id: "sortor",    name: "Nick Sortor",     outlet: "X",
+      charge: "“BREAKING… Robinson is SCREWED” — same script, same hours as seven others, ~10M collective reach" },
+    { id: "eagleman",  name: "Gunther Eagleman", outlet: "X",
+      charge: "“Game over. Tyler Robinson is TOAST and Candace Owens was wrong about EVERYTHING”" },
+    { id: "insiderwire", name: "Insider Wire",  outlet: "X",
+      charge: "“BREAKING: High-quality footage shown in court…” — the wire for the wave, 435K views on the script" },
+    { id: "tony",      name: "TONY™",           outlet: "X",
+      charge: "“It's over… Candace Owens should be sued into oblivion”" },
+    { id: "zerohour",  name: "0HOUR1",          outlet: "X",
+      charge: "“It's a fact… he is 100% guilty. Spreading any nonsense now, you're just a weirdo”" },
     { id: "network",   name: "the unnamed network", outlet: "“the American market”",
-      charge: "the foundation's budget — mouths not yet named; this poster is a placeholder for a hole" }
+      charge: "the foundation's budget — mouths not yet named; this circle is a placeholder for a hole" }
   ],
 
-  /* ——— THE PLUMBING: trough → poster, graded, dated (stamp lands when the date passes) ——— */
-  edges: [
-    { trough: "israel", poster: "parscale", grade: "documented", date: "2025-09-18",
-      stamp: "PAID · ISRAEL MFA · $1.5M/MO",
-      note: "FARA registration #7649, filed Sept 18, 2025 — eight days after Kirk was killed. $9M disclosed via Havas Media Germany. Scope: AI content, SEO, ≥80% Gen-Z targeting, and integration with Salem Media Network properties.",
+  /* ——— THE MONEY: from → to (org or person), graded, dated. Depth on the map falls out of these. ——— */
+  money: [
+    { from: "israel", to: "havas", grade: "documented", date: "2025-09-18",
+      note: "FARA #7649 discloses the Israel MFA contracting through Havas Media Germany GmbH.",
       sources: [
         { label: "DOJ FARA database (reg. 7649)", url: "https://efile.fara.gov/ords/fara/f?p=1381:1" },
-        { label: "The Hill", url: "https://thehill.com/policy/international/5528458-brad-parscale-israel-foreign-agent/" },
+        { label: "The Hill", url: "https://thehill.com/policy/international/5528458-brad-parscale-israel-foreign-agent/" }
+      ] },
+    { from: "havas", to: "clocktower", grade: "documented", date: "2025-09-18",
+      note: "FARA registration #7649, filed Sept 18, 2025 — eight days after Kirk was killed. $9M disclosed ($1.5M/month). Scope: AI content, SEO, ≥80% Gen-Z targeting, and integration with Salem Media Network properties.",
+      sources: [
+        { label: "DOJ FARA database (reg. 7649)", url: "https://efile.fara.gov/ords/fara/f?p=1381:1" },
         { label: "The Intercept (May 28, 2026)", url: "https://theintercept.com/2026/05/28/israeli-government-money-brad-parsc/" }
       ] },
-    { trough: "salem", poster: "kolvet", grade: "documented", date: "2025-09-10",
-      stamp: "DISTRIBUTED · SALEM",
-      note: "Salem's same-day statement: the show continues on Salem Podcast Network, Kolvet co-hosting. The foreign agent's later contract scope names Salem integration.",
+    { from: "clocktower", to: "parscale", grade: "documented", date: "2025-09-18",
+      stamp: "OWNER · FARA #7649 · $1.5M/MO",
+      note: "Parscale is the disclosed owner of Clock Tower X; the registration is his.",
+      sources: [ { label: "The Hill", url: "https://thehill.com/policy/international/5528458-brad-parscale-israel-foreign-agent/" } ] },
+    { from: "clocktower", to: "salem", grade: "documented", date: "2025-09-18",
+      note: "“Integration with Salem Media Network properties” is written into the FARA filing's scope; Parscale as Salem's Chief Strategy Officer is reported.",
       sources: [
-        { label: "Salem Media statement, Sept 10, 2025", url: "https://www.globenewswire.com/news-release/2025/09/10/3148287/0/en/salem-media-statement-on-the-assassination-of-charlie-kirk.html" },
-        { label: "The Grayzone", url: "https://thegrayzone.com/2026/06/18/israeli-foreign-agent-charlie-kirk-show/" }
+        { label: "The Grayzone", url: "https://thegrayzone.com/2026/06/18/israeli-foreign-agent-charlie-kirk-show/" },
+        { label: "Radio Ink", url: "https://radioink.com/2025/12/17/charlie-kirk-replacement-hosts-revealed-by-salem/" }
       ] },
-    { trough: "salem", poster: "marlow", grade: "documented", date: "2025-12-17",
+    { from: "salem", to: "kirkshow", grade: "documented", date: "2025-09-10",
+      note: "Salem's same-day statement: the show continues on Salem Podcast Network.",
+      sources: [ { label: "Salem Media statement, Sept 10, 2025", url: "https://www.globenewswire.com/news-release/2025/09/10/3148287/0/en/salem-media-statement-on-the-assassination-of-charlie-kirk.html" } ] },
+    { from: "kirkshow", to: "kolvet", grade: "documented", date: "2025-09-10",
+      stamp: "CO-HOST · SALEM",
+      note: "Kolvet continues as co-host under Salem distribution — inside the foreign agent's later contract scope.",
+      sources: [ { label: "Salem Media statement", url: "https://www.globenewswire.com/news-release/2025/09/10/3148287/0/en/salem-media-statement-on-the-assassination-of-charlie-kirk.html" } ] },
+    { from: "kirkshow", to: "neff", grade: "reported", date: "2025-10-01",
+      stamp: "SHOW REP · SALEM",
+      note: "Neff described as a new Charlie Kirk Show representative in coverage; date approximate.",
+      sources: [ { label: "Liberty Lockdown panel", url: "https://www.youtube.com/watch?v=Fk4RFSn6gqs" } ] },
+    { from: "salem", to: "marlow", grade: "documented", date: "2025-12-17",
       stamp: "SLOTTED · SALEM",
       note: "Salem reveals Marlow & Jennings take Kirk's radio slot (Radio Ink, Dec 17, 2025); live Jan 5, 2026.",
       sources: [ { label: "Radio Ink", url: "https://radioink.com/2025/12/17/charlie-kirk-replacement-hosts-revealed-by-salem/" } ] },
-    { trough: "salem", poster: "jennings", grade: "documented", date: "2025-12-17",
+    { from: "salem", to: "jennings", grade: "documented", date: "2025-12-17",
       stamp: "SLOTTED · SALEM",
       note: "Salem reveals Marlow & Jennings take Kirk's radio slot (Radio Ink, Dec 17, 2025); live Jan 5, 2026.",
       sources: [ { label: "Radio Ink", url: "https://radioink.com/2025/12/17/charlie-kirk-replacement-hosts-revealed-by-salem/" } ] },
-    { trough: "tpusa", poster: "wilson", grade: "reported", date: "2026-07-08",
+    { from: "tpusa", to: "wilson", grade: "reported", date: "2026-07-08",
       stamp: "HIRED · TPUSA",
       note: "TPUSA hired Wilson to train its campus debaters, per Wilson's own on-air statement — after documented years of attacking Kirk, Erika Kirk, and TPUSA (posts 2021, Mar 2026, Apr 2026). Date approximate to the reporting.",
       sources: [ { label: "Liberty Lockdown", url: "https://www.youtube.com/watch?v=6UyRv-Uq4LQ" } ] },
-    { trough: "dod", poster: "allen", grade: "reported", date: "2025-09-10",
+    { from: "dod", to: "allen", grade: "reported", date: "2025-09-10",
       stamp: "EX-PENTAGON · DIGITAL MEDIA",
-      note: "Former Pentagon “senior strategic consultant for digital media,” now among the loudest official-narrative defenders. The consultancy is checkable: USASpending / FPDS, or a DoD FOIA on the sibling site. Stamp shown from day one because the role predates the window.",
+      note: "Former Pentagon “senior strategic consultant for digital media,” now among the loudest official-narrative defenders. CHECKABLE: USASpending / FPDS, or a DoD FOIA on the sibling site. Shown from day one because the role predates the window.",
       sources: [ { label: "Liberty Lockdown (the Allen parallel)", url: "https://www.youtube.com/watch?v=6UyRv-Uq4LQ" } ] },
-    { trough: "foundation", poster: "network", grade: "claimed", date: "2025-09-10",
+    { from: "foundation", to: "network", grade: "claimed", date: "2025-09-10",
       stamp: "“BUDGET FOR THE AMERICAN MARKET”",
-      note: "Bruesewitz, on Tucker Carlson's show, read a message dated June 16, 2025: “good news from Israel, they have budget for the American market... it is through a foundation.” The message has not been produced; the poster is a hole wearing a sheet.",
+      note: "Bruesewitz, on Tucker Carlson's show, read a message dated June 16, 2025: “good news from Israel, they have budget for the American market... it is through a foundation.” The message has not been produced; the circle is a hole wearing a sheet.",
       sources: [ { label: "Bruesewitz clip via Liberty Lockdown", url: "https://www.youtube.com/watch?v=2gAM3VILTvI" } ] }
   ],
 
@@ -178,7 +209,11 @@ const SLOP = {
       sources: [ { label: "Liberty Lockdown", url: "https://www.youtube.com/watch?v=6UyRv-Uq4LQ" } ] },
     { date: "2026-07-10", type: "wave", grade: "documented", riders: ["kolvet", "posobiec", "philip"],
       script: "“Let me tell you about Erika Kirk's endless kindness...”",
-      label: "THE KINDNESS WAVE — hearing week, as the state’s physical evidence cracks in open court: al.com runs two dated human-interest pieces (Mark Heim — “Hanky Gate” Tuesday, “Balloon Gate” Wednesday), then on day four a same-day cluster of Erika Kirk kindness stories fires across TPUSA-orbit accounts — Kolvet (“another amazing story about Erika’s quiet and private kindness”), Posobiec, Danny Philip, and a fourth rider whose surname the captions garble. Coleman reads each post verbatim on air and calls it: “organize a social media campaign across many channels… this was the evidence — it was an op.”",
-      sources: [ { label: "Baron Coleman, Ep. 142 (the cluster walk-through)", url: "https://www.youtube.com/watch?v=6ZZ_e53ZDnY" } ] }
+      label: "THE KINDNESS WAVE — hearing week, as the state's physical evidence cracks in open court: al.com runs two dated human-interest pieces (Mark Heim — “Hanky Gate” Tuesday, “Balloon Gate” Wednesday), then on day four a same-day cluster of Erika Kirk kindness stories fires across TPUSA-orbit accounts — Kolvet (“another amazing story about Erika's quiet and private kindness”), Posobiec, Danny Philip, and a fourth rider whose surname the captions garble. Coleman reads each post verbatim on air and calls it: “organize a social media campaign across many channels… this was the evidence — it was an op.”",
+      sources: [ { label: "Baron Coleman, Ep. 142 (the cluster walk-through)", url: "https://www.youtube.com/watch?v=6ZZ_e53ZDnY" } ] },
+    { date: "2026-07-11", type: "wave", grade: "documented", riders: ["sortor", "posobiec", "insiderwire", "kolvet", "tony", "eagleman", "zerohour", "allen"],
+      script: "“You can see him take the shot. It's over.”",
+      label: "THE “IT'S OVER” WAVE — the day the state's enhanced video compilation (12.1) played in court, eight accounts with roughly ten million collective followers fired the same script within about two hours: “you can see him take the shot — it's over — Candace was wrong about EVERYTHING.” Set against the courtroom record of the same video as relayed in day-five coverage: played audio-only, not broadcast, described by an attendee as distant, blurry, no gun visible. No guilty plea exists. The timestamped post collage is the receipt.",
+      sources: [ { label: "@GoUncensored — the eight-post collage, timestamped", url: "https://x.com/GoUncensored/status/2075806153619960204" } ] }
   ]
 };

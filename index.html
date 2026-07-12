@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Follow the Slop</title>
-<meta name="description" content="The talking points are coordinated. The money is public record. Follow both. Orgs ashore, shills at sea, script waves on radar — scrub the timeline and watch the machine assemble itself. Client-side only, no tracking.">
+<meta name="description" content="The talking points are coordinated. The money is public record. Follow both. Money falls tier by tier, waves radiate from the mouths, and the matrix counts repeat riders. Client-side only, no tracking.">
 <style>
   :root{
     --bg:#0a0c08; --panel:#11140d; --panel2:#181c12; --line:#2a3021;
@@ -31,38 +31,38 @@
   .gk.reported{color:var(--amber);border-color:#5c4c2a;background:rgba(224,179,74,.08)}
   .gk.claimed{color:var(--red);border-color:#5c342a;background:rgba(224,90,74,.08)}
 
-  /* ——— the map: shore + sea ——— */
-  #map{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 12px 8px;overflow:hidden}
+  /* ——— the map: money falls, waves radiate ——— */
+  #map{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 12px 10px;overflow:hidden}
   #wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
-  .tierlbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:2px 6px 8px;position:relative;z-index:2}
+  .tierlbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:2px 6px 10px;position:relative;z-index:2}
   .tierlbl b{color:var(--ink2)}
-  #trough{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2;margin-bottom:10px}
-  .org{background:var(--panel2);border:1px solid var(--line);border-top:3px solid #55603f;border-radius:10px;padding:9px 13px;min-width:150px;max-width:210px;text-align:center;cursor:pointer;position:relative;z-index:2}
-  .org:hover,.org.sel{border-color:var(--slop);box-shadow:0 0 14px rgba(168,224,74,.3)}
-  .org .nm{font-weight:700;font-size:13px;line-height:1.25}
-  .org .sub{font-family:var(--mono);font-size:9.5px;color:var(--faint);margin-top:3px;line-height:1.4}
-
-  #sea{position:relative;z-index:2;min-height:300px;border-top:1px dashed #232a18;
+  #field{position:relative;z-index:2;
        background:
-         radial-gradient(circle at 50% -140px, rgba(168,224,74,.05) 0 180px, transparent 181px),
-         radial-gradient(circle at 50% -140px, transparent 0 259px, rgba(168,224,74,.035) 260px 262px, transparent 263px),
-         radial-gradient(circle at 50% -140px, transparent 0 379px, rgba(168,224,74,.03) 380px 382px, transparent 383px)}
-  .shill{position:absolute;transform:translateX(-50%);text-align:center;cursor:pointer;width:110px;z-index:3}
-  .avwrap{position:relative;width:64px;height:64px;margin:0 auto}
-  .sz2 .avwrap{width:78px;height:78px}
-  .sz3 .avwrap{width:92px;height:92px}
-  .av{width:100%;height:100%;border-radius:50%;background:#232a18;border:2.5px solid #55603f;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--headline);font-style:italic;font-size:24px;color:var(--ink2);letter-spacing:.02em;position:relative;z-index:2}
+         radial-gradient(circle at 50% -140px, rgba(168,224,74,.04) 0 220px, transparent 221px),
+         radial-gradient(circle at 50% -140px, transparent 0 379px, rgba(168,224,74,.03) 380px 382px, transparent 383px),
+         radial-gradient(circle at 50% -140px, transparent 0 559px, rgba(168,224,74,.025) 560px 562px, transparent 563px)}
+  .org{position:absolute;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--line);border-top:3px solid #55603f;border-radius:10px;padding:8px 12px;width:172px;text-align:center;cursor:pointer;z-index:3}
+  .org:hover,.org.sel{border-color:var(--slop);box-shadow:0 0 14px rgba(168,224,74,.3)}
+  .org .nm{font-weight:700;font-size:12.5px;line-height:1.25}
+  .org .sub{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:3px;line-height:1.4}
+  .org.dimmed{opacity:.25}
+
+  .shill{position:absolute;transform:translateX(-50%);text-align:center;cursor:pointer;width:112px;z-index:3}
+  .avwrap{position:relative;width:60px;height:60px;margin:0 auto}
+  .sz2 .avwrap{width:72px;height:72px}
+  .sz3 .avwrap{width:86px;height:86px}
+  .av{width:100%;height:100%;border-radius:50%;background:#232a18;border:2.5px solid #55603f;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--headline);font-style:italic;font-size:22px;color:var(--ink2);letter-spacing:.02em;position:relative;z-index:2}
   .av img{width:100%;height:100%;object-fit:cover;display:block}
   .shill:hover .av,.shill.sel .av{border-color:var(--slop);box-shadow:0 0 14px rgba(168,224,74,.4)}
   .shill.funded.g-documented .av{border-color:var(--slop)}
   .shill.funded.g-reported .av{border-color:var(--amber)}
   .shill.funded.g-claimed .av{border-color:var(--red);border-style:dashed}
-  .shill .lbl{font-family:var(--mono);font-size:9.5px;color:var(--ink2);margin-top:5px;line-height:1.3;text-transform:uppercase;letter-spacing:.03em}
-  .shill .chip{display:none;font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;border-radius:3px;padding:1px 6px;margin-top:3px;border:1px solid var(--amber);color:var(--amber);transform:rotate(-4deg)}
+  .shill .lbl{font-family:var(--mono);font-size:9px;color:var(--ink2);margin-top:4px;line-height:1.25;text-transform:uppercase;letter-spacing:.03em}
+  .shill .chip{display:none;font-family:var(--mono);font-size:8px;letter-spacing:.06em;border-radius:3px;padding:1px 5px;margin-top:2px;border:1px solid var(--amber);color:var(--amber);transform:rotate(-4deg)}
   .shill.funded .chip{display:inline-block}
   .shill.funded.g-documented .chip{border-color:var(--slop);color:var(--slop)}
   .shill.funded.g-claimed .chip{border-color:var(--red);color:var(--red);border-style:dashed}
-  .shill.dimmed{opacity:.25}
+  .shill.dimmed{opacity:.22}
   .ring{position:absolute;inset:0;border-radius:50%;pointer-events:none;z-index:1}
   .ring::before,.ring::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--slop);opacity:0}
   .shill.spewing .ring::before{animation:blip 1.7s ease-out infinite}
@@ -71,14 +71,15 @@
   @media (prefers-reduced-motion: reduce){
     .shill.spewing .ring::before,.shill.spewing .ring::after{animation:none;transform:scale(1.6);opacity:.4}
   }
-  .bubble{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);width:170px;background:#131a0c;border:1px solid var(--slop);border-radius:8px;padding:6px 8px;font-size:10.5px;color:var(--slop);opacity:0;pointer-events:none;transition:opacity .2s;z-index:6}
+  .bubble{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);width:160px;background:#131a0c;border:1px solid var(--slop);border-radius:8px;padding:5px 7px;font-size:10px;color:var(--slop);opacity:0;pointer-events:none;transition:opacity .2s;z-index:6}
   .bubble::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--slop)}
   .shill.spewing .bubble{opacity:1}
-  .wire{fill:none;stroke-width:2;opacity:.05;transition:opacity .15s,stroke-width .15s}
+  .wire{fill:none;stroke-width:2;opacity:.3;transition:opacity .15s,stroke-width .15s}
   .wire.documented{stroke:var(--slop)}
   .wire.reported{stroke:var(--amber)}
   .wire.claimed{stroke:var(--red);stroke-dasharray:7 5}
-  .wire.hot{opacity:1;stroke-width:3.2;filter:drop-shadow(0 0 5px rgba(168,224,74,.45))}
+  .wire.hot{opacity:1;stroke-width:3.4;filter:drop-shadow(0 0 5px rgba(168,224,74,.45))}
+  .wire.dimmed{opacity:.05}
 
   .rap{position:fixed;z-index:200;max-width:340px;max-height:62vh;overflow-y:auto;background:#10140b;border:1px solid var(--slop);border-radius:10px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.85);display:none}
   .rap.show{display:block}
@@ -110,6 +111,20 @@
   #banner .btag.marker{color:var(--faint)}
   #banner a{margin-right:10px;font-size:12px}
 
+  /* ——— the matrix ——— */
+  #matrix{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto}
+  #matrix table{border-collapse:collapse;font-family:var(--mono);font-size:11px;width:100%}
+  #matrix th{color:var(--faint);font-weight:400;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;padding:4px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  #matrix th.who{text-align:left}
+  #matrix td{padding:4px 6px;text-align:center;border-top:1px solid #1a2013}
+  #matrix td.who{text-align:left;color:var(--ink2);white-space:nowrap;cursor:pointer}
+  #matrix td.who:hover{color:var(--slop)}
+  #matrix td.n{color:var(--ink);font-weight:700}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%}
+  .dot.documented{background:var(--slop);box-shadow:0 0 6px rgba(168,224,74,.6)}
+  .dot.reported{background:var(--amber)}
+  .dot.claimed{background:var(--red)}
+
   h2.section{font-size:13px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--slop);margin:30px 0 4px;border-bottom:1px solid var(--line);padding-bottom:7px}
   .seclede{font-size:12.5px;color:var(--faint);margin:6px 0 10px}
   .toolbox{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
@@ -135,11 +150,9 @@
   </div>
 
   <div id="map">
+    <div class="tierlbl"><b>THE FALL</b> — money enters at the top; every tier hangs below whatever funds it · hover anything to light its full chain · click a circle for the rap sheet</div>
     <svg id="wires" xmlns="http://www.w3.org/2000/svg"></svg>
-    <div class="tierlbl"><b>THE TROUGH</b> — who fills it · hover or click an org to trace its plumbing</div>
-    <div id="trough"></div>
-    <div class="tierlbl"><b>THE SHILLS</b> — circles cluster near their money · unclaimed mouths drift in open water · click one for the rap sheet</div>
-    <div id="sea"></div>
+    <div id="field"></div>
   </div>
 
   <div id="timebar">
@@ -150,6 +163,10 @@
     </div>
     <div id="banner"></div>
   </div>
+
+  <h2 class="section">The matrix — who rides what</h2>
+  <div class="seclede">Rows are mouths, columns are waves in date order, dots wear the wave's grade. The count is the number no single screenshot can show.</div>
+  <div id="matrix"></div>
 
   <div class="rap" id="rap"><button class="close" id="rapClose">✕</button><div id="rapBody"></div></div>
 
@@ -170,26 +187,40 @@
   $("tagline").textContent = SLOP.meta.tagline;
   $("premise").textContent = SLOP.meta.premise;
 
-  /* ——— shore: org tiles ——— */
-  const orgEl = {};
-  SLOP.troughs.forEach(t => {
-    const d = document.createElement("div");
-    d.className = "org"; d.dataset.id = t.id;
-    d.innerHTML = `<div class="nm">${esc(t.name)}</div><div class="sub">${esc(t.sub)}</div>`;
-    $("trough").appendChild(d); orgEl[t.id] = d;
-  });
+  /* ——— graph shape: depth = longest money-path from a source ——— */
+  const isPerson = {};
+  SLOP.people.forEach(p => isPerson[p.id] = true);
+  const inEdges = id => SLOP.money.filter(e => e.to === id);
+  const depthMemo = {};
+  function depthOf(id){
+    if(id in depthMemo) return depthMemo[id];
+    depthMemo[id] = 0;                                   // cycle guard
+    const ins = inEdges(id);
+    const d = ins.length ? 1 + Math.max(...ins.map(e => depthOf(e.from))) : 0;
+    return depthMemo[id] = d;
+  }
+  const inMoney = new Set();
+  SLOP.money.forEach(e => { inMoney.add(e.from); inMoney.add(e.to); });
+  const allIds = [...SLOP.orgs.map(o => o.id), ...SLOP.people.map(p => p.id)];
+  allIds.filter(id => inMoney.has(id)).forEach(depthOf);
+  const maxMoneyDepth = Math.max(...Object.values(depthMemo));
+  const openWater = SLOP.people.filter(p => !inMoney.has(p.id)).map(p => p.id);
 
-  /* ——— sea: circular shills; avatar = mugs/<id>.jpg if present, initials otherwise ——— */
-  const shillEl = {};
-  const receiptsOf = pid =>
-    SLOP.edges.filter(e => e.poster === pid).length +
-    SLOP.events.filter(ev => (ev.riders||[]).includes(pid)).length;
-  SLOP.posters.forEach(p => {
-    const n = receiptsOf(p.id);
+  /* ——— build elements ——— */
+  const el = {};
+  SLOP.orgs.forEach(o => {
+    const d = document.createElement("div");
+    d.className = "org"; d.dataset.id = o.id;
+    d.innerHTML = `<div class="nm">${esc(o.name)}</div><div class="sub">${esc(o.sub)}</div>`;
+    $("field").appendChild(d); el[o.id] = d;
+  });
+  const ridesOf = pid => SLOP.events.filter(ev => ev.type === "wave" && (ev.riders||[]).includes(pid)).length;
+  SLOP.people.forEach(p => {
+    const n = inEdges(p.id).length + ridesOf(p.id);
     const d = document.createElement("div");
     d.className = "shill" + (n >= 3 ? " sz3" : n === 2 ? " sz2" : "");
     d.dataset.id = p.id;
-    const edge = SLOP.edges.find(e => e.poster === p.id);
+    const edge = inEdges(p.id)[0];
     if(edge) d.classList.add("g-" + edge.grade);
     const initials = p.name.split(/\s+/).map(w => w[0]).join("").slice(0,3).toUpperCase();
     d.innerHTML =
@@ -197,109 +228,129 @@
       `<div class="av"><span class="ini">${esc(initials)}</span>` +
       `<img src="mugs/${esc(p.id)}.jpg" alt="" loading="lazy" onerror="this.remove()" onload="this.previousElementSibling.remove()"></div></div>` +
       `<div class="lbl" title="${esc(p.outlet)}">${esc(p.name)}</div>` +
-      (edge ? `<div class="chip" title="${esc(edge.stamp)}">${esc((SLOP.troughs.find(t => t.id === edge.trough)||{}).short || edge.trough)}</div>` : "");
-    $("sea").appendChild(d); shillEl[p.id] = d;
+      (edge && edge.stamp ? `<div class="chip" title="${esc(edge.stamp)}">${esc(edge.stamp.split("·")[0].trim())}</div>` : "");
+    $("field").appendChild(d); el[p.id] = d;
   });
 
-  /* wires: hidden by default, drawn on demand */
   const NS = "http://www.w3.org/2000/svg";
   const wires = [];
-  SLOP.edges.forEach(e => {
+  SLOP.money.forEach(e => {
     const w = document.createElementNS(NS, "path");
     w.setAttribute("class", "wire " + e.grade);
     $("wires").appendChild(w);
     wires.push({ el: w, e });
   });
 
-  /* deterministic layout: cluster each shill near its funder's anchor; open water for the rest */
-  function layoutSea(){
-    const map = $("map").getBoundingClientRect();
-    const sea = $("sea").getBoundingClientRect();
-    const anchor = {};
-    Object.entries(orgEl).forEach(([id, el]) => {
-      const r = el.getBoundingClientRect();
-      anchor[id] = (r.left + r.width/2 - map.left) / map.width * 100;
+  /* ——— layered layout: each row hangs under its money ——— */
+  const ROWH = 148, TOPPAD = 26;
+  function layout(){
+    const rows = {};
+    allIds.filter(id => inMoney.has(id)).forEach(id => {
+      const d = depthMemo[id];
+      (rows[d] = rows[d] || []).push(id);
     });
-    const groups = {};
-    const open = [];   // no money edge drawn yet: deeper water, murkier money
-    SLOP.posters.forEach(p => {
-      const es = SLOP.edges.filter(e => e.poster === p.id);
-      if(!es.length){ open.push(p.id); return; }
-      const ax = es.reduce((s, e) => s + anchor[e.trough], 0) / es.length;
-      const key = Math.round(ax * 10) / 10;
-      (groups[key] = groups[key] || []).push(p.id);
-    });
-    let maxY = 0;
-    Object.entries(groups).forEach(([ax, ids]) => {
-      ids.forEach((id, i) => {
-        const ang = i * 2.4, r = i ? 15 + 13 * Math.sqrt(i) : 0;
-        const x = Math.max(7, Math.min(93, (+ax) + (r * Math.cos(ang)) / 3.1));
-        const y = 46 + Math.abs(r * Math.sin(ang)) * 2.5 + (i ? 10 * i : 0);
-        const el = shillEl[id];
-        el.style.left = x + "%";
-        el.style.top = y + "px";
-        maxY = Math.max(maxY, y);
+    const xPos = {};
+    Object.keys(rows).map(Number).sort((a,b) => a - b).forEach(d => {
+      const ids = rows[d];
+      // desired x = average of parents; roots spread evenly
+      const desired = ids.map(id => {
+        const ins = inEdges(id);
+        if(!ins.length) return null;
+        return ins.reduce((s, e) => s + (xPos[e.from] ?? 50), 0) / ins.length;
+      });
+      if(desired.every(v => v === null)){
+        ids.forEach((id, i) => xPos[id] = ids.length === 1 ? 50 : 12 + i * (76 / (ids.length - 1)));
+      } else {
+        const order = ids.map((id, i) => ({ id, want: desired[i] ?? 50 })).sort((a, b) => a.want - b.want);
+        const minGap = Math.min(22, 84 / Math.max(1, order.length - 1) || 84);
+        let prev = -100;
+        order.forEach(o => { const x = Math.max(o.want, prev + minGap); xPos[o.id] = x; prev = x; });
+        // pull back into bounds if the row drifted right
+        const over = Math.max(0, prev - 90);
+        if(over) order.forEach(o => xPos[o.id] = Math.max(8, xPos[o.id] - over));
+      }
+      ids.forEach(id => {
+        el[id].style.left = Math.max(8, Math.min(92, xPos[id])) + "%";
+        el[id].style.top = (TOPPAD + d * ROWH) + "px";
       });
     });
+    // open water: no money edge drawn yet — deeper rows, murkier money
+    const base = TOPPAD + (maxMoneyDepth + 1) * ROWH + 12;
     const PERROW = 6;
-    open.forEach((id, i) => {
+    openWater.forEach((id, i) => {
       const row = Math.floor(i / PERROW);
-      const n = Math.min(PERROW, open.length - row * PERROW);
+      const n = Math.min(PERROW, openWater.length - row * PERROW);
       const col = i % PERROW;
       const x = n === 1 ? 50 : 10 + col * (80 / (n - 1));
-      const y = maxY + 120 + row * 122;
-      const el = shillEl[id];
-      el.style.left = x + "%";
-      el.style.top = y + "px";
+      el[id].style.left = x + "%";
+      el[id].style.top = (base + row * 128) + "px";
     });
-    const rows = Math.ceil(open.length / PERROW);
-    $("sea").style.height = (maxY + (open.length ? 120 + (rows - 1) * 122 : 0) + 132) + "px";
+    const owRows = Math.ceil(openWater.length / PERROW);
+    $("field").style.height = (base + owRows * 128 + 30) + "px";
     drawWires();
   }
   function drawWires(){
     const box = $("map").getBoundingClientRect();
     $("wires").setAttribute("viewBox", "0 0 " + box.width + " " + box.height);
-    wires.forEach(({ el, e }) => {
-      const a = orgEl[e.trough].getBoundingClientRect();
-      const b = shillEl[e.poster].querySelector(".av").getBoundingClientRect();
+    wires.forEach(({ el: w, e }) => {
+      const a = el[e.from].getBoundingClientRect();
+      const bEl = isPerson[e.to] ? el[e.to].querySelector(".av") : el[e.to];
+      const b = bEl.getBoundingClientRect();
       const x1 = a.left + a.width/2 - box.left, y1 = a.bottom - box.top;
       const x2 = b.left + b.width/2 - box.left, y2 = b.top - box.top;
-      const bend = Math.max(26, (y2 - y1) * 0.45);
-      el.setAttribute("d", `M ${x1} ${y1} C ${x1} ${y1 + bend}, ${x2} ${y2 - bend}, ${x2} ${y2}`);
+      const bend = Math.max(22, (y2 - y1) * 0.45);
+      w.setAttribute("d", `M ${x1} ${y1} C ${x1} ${y1 + bend}, ${x2} ${y2 - bend}, ${x2} ${y2}`);
     });
   }
-  window.addEventListener("resize", layoutSea);
-  window.addEventListener("load", layoutSea);
-  layoutSea();
+  window.addEventListener("resize", layout);
+  window.addEventListener("load", layout);
+  layout();
 
-  /* trace: hover/lock an org, or hover a shill, to light the plumbing */
-  let lockedOrg = null;
-  function trace(orgId, shillId){
-    wires.forEach(({ el, e }) => {
-      const hot = (orgId && e.trough === orgId) || (shillId && e.poster === shillId);
-      el.classList.toggle("hot", !!hot);
-    });
-    Object.entries(shillEl).forEach(([pid, el]) => {
-      const touched = !orgId || SLOP.edges.some(e => e.trough === orgId && e.poster === pid);
-      el.classList.toggle("dimmed", !!orgId && !touched);
-    });
-    Object.entries(orgEl).forEach(([oid, el]) => el.classList.toggle("sel", oid === orgId));
+  /* ——— trace: hover any node → light its full chain, up and down ——— */
+  function chainOf(id){
+    const hot = new Set();
+    const up = [id], down = [id], seen = new Set([id]);
+    while(up.length){
+      const cur = up.pop();
+      SLOP.money.forEach((e, i) => { if(e.to === cur){ hot.add(i); if(!seen.has(e.from)){ seen.add(e.from); up.push(e.from); } } });
+    }
+    while(down.length){
+      const cur = down.pop();
+      SLOP.money.forEach((e, i) => { if(e.from === cur){ hot.add(i); if(!seen.has(e.to)){ seen.add(e.to); down.push(e.to); } } });
+    }
+    return { hot, seen };
   }
-  Object.entries(orgEl).forEach(([oid, el]) => {
-    el.addEventListener("mouseenter", () => { if(!lockedOrg) trace(oid, null); });
-    el.addEventListener("mouseleave", () => { if(!lockedOrg) trace(null, null); });
-    el.addEventListener("click", () => { lockedOrg = lockedOrg === oid ? null : oid; trace(lockedOrg, null); });
+  let locked = null;
+  function trace(id){
+    if(!id){
+      wires.forEach(({ el: w }) => w.classList.remove("hot", "dimmed"));
+      Object.values(el).forEach(n => n.classList.remove("dimmed", "sel"));
+      return;
+    }
+    const { hot, seen } = chainOf(id);
+    wires.forEach(({ el: w }, i) => {
+      w.classList.toggle("hot", hot.has(i));
+      w.classList.toggle("dimmed", !hot.has(i));
+    });
+    Object.entries(el).forEach(([nid, n]) => {
+      n.classList.toggle("dimmed", !seen.has(nid));
+      n.classList.toggle("sel", nid === id);
+    });
+  }
+  Object.entries(el).forEach(([id, n]) => {
+    n.addEventListener("mouseenter", () => { if(!locked) trace(id); });
+    n.addEventListener("mouseleave", () => { if(!locked) trace(null); });
   });
-  Object.entries(shillEl).forEach(([pid, el]) => {
-    el.addEventListener("mouseenter", () => { if(!lockedOrg) trace(null, pid); });
-    el.addEventListener("mouseleave", () => { if(!lockedOrg) trace(null, null); });
+  $("field").addEventListener("click", e => {
+    const org = e.target.closest(".org");
+    if(org){ locked = locked === org.dataset.id ? null : org.dataset.id; trace(locked); }
   });
 
-  /* rap sheet popover — flips above when there's no room below */
+  /* ——— rap sheets (people) ——— */
   function showRap(pid, anchorEl){
-    const p = SLOP.posters.find(x => x.id === pid);
+    const p = SLOP.people.find(x => x.id === pid);
     const lines = [];
-    SLOP.edges.filter(e => e.poster === pid).forEach(e => lines.push({ grade: e.grade, text: e.note, sources: e.sources }));
+    inEdges(pid).forEach(e => lines.push({ grade: e.grade, text: e.note, sources: e.sources }));
     SLOP.events.filter(ev => (ev.riders||[]).includes(pid)).forEach(ev => lines.push({ grade: ev.grade, text: ev.label, sources: ev.sources }));
     $("rapBody").innerHTML = `<div class="rn">${esc(p.name)}</div><div class="charge">${esc(p.charge)}</div>` +
       lines.map(l => `<div class="line"><span class="gk ${esc(l.grade)}">${esc(l.grade)}</span> ${esc(l.text)}<br>` +
@@ -317,7 +368,7 @@
   document.addEventListener("click", e => {
     const sh = e.target.closest(".shill");
     if(sh){ showRap(sh.dataset.id, sh); return; }
-    if(!e.target.closest(".rap")) $("rap").classList.remove("show");
+    if(!e.target.closest(".rap") && !e.target.closest(".org")) $("rap").classList.remove("show");
   });
 
   /* ——— the timeline ——— */
@@ -343,13 +394,13 @@
   function update(){
     const d = +rail.value;
     $("dateOut").textContent = fmt(d);
-    SLOP.edges.forEach(e => shillEl[e.poster].classList.toggle("funded", evDay(e) <= d));
+    SLOP.money.forEach(e => { if(isPerson[e.to]) el[e.to].classList.toggle("funded", evDay(e) <= d); });
     const active = SLOP.events.filter(ev => ev.type === "wave" && d >= evDay(ev) && d <= evDay(ev) + 4);
-    Object.values(shillEl).forEach(el => el.classList.remove("spewing"));
+    SLOP.people.forEach(p => el[p.id].classList.remove("spewing"));
     active.forEach(ev => (ev.riders||[]).forEach(pid => {
-      const el = shillEl[pid]; if(!el) return;
-      el.classList.add("spewing");
-      el.querySelector(".bubble").textContent = ev.script || "";
+      const n = el[pid]; if(!n) return;
+      n.classList.add("spewing");
+      n.querySelector(".bubble").textContent = ev.script || "";
     }));
     const passed = SLOP.events.filter(ev => evDay(ev) <= d);
     const cur = passed[passed.length - 1];
@@ -371,6 +422,27 @@
     }, 90);
   });
   update();
+
+  /* ——— the matrix: rider × wave ——— */
+  (function buildMatrix(){
+    const waves = SLOP.events.filter(ev => ev.type === "wave");
+    const riders = SLOP.people
+      .map(p => ({ p, n: ridesOf(p.id) }))
+      .filter(x => x.n > 0)
+      .sort((a, b) => b.n - a.n || a.p.name.localeCompare(b.p.name));
+    const head = `<tr><th class="who">mouth</th>` +
+      waves.map(w => `<th title="${esc(w.script)}">${esc(w.date.slice(5).replace("-", "/"))}</th>`).join("") +
+      `<th>rides</th></tr>`;
+    const body = riders.map(({ p, n }) =>
+      `<tr><td class="who" data-rap="${esc(p.id)}">${esc(p.name)}</td>` +
+      waves.map(w => `<td>${(w.riders||[]).includes(p.id) ? `<span class="dot ${esc(w.grade)}" title="${esc(w.script)}"></span>` : ""}</td>`).join("") +
+      `<td class="n">${n}</td></tr>`).join("");
+    $("matrix").innerHTML = `<table>${head}${body}</table>`;
+    $("matrix").addEventListener("click", e => {
+      const c = e.target.closest("[data-rap]");
+      if(c) showRap(c.dataset.rap, c);
+    });
+  })();
 
   $("toolbox").innerHTML = SLOP.meta.check_yourself.map(t => `<a class="tool" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)} ↗</a>`).join("");
   $("siblings").innerHTML = SLOP.meta.siblings.map(t => `<a class="tool" href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.label)} ↗</a>`).join("");
