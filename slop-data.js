@@ -90,7 +90,9 @@ const SLOP = {
     { id: "zerohour",  name: "0HOUR1",          outlet: "X",
       charge: "“It's a fact… he is 100% guilty. Spreading any nonsense now, you're just a weirdo”" },
     { id: "network",   name: "the unnamed network", outlet: "“the American market”",
-      charge: "the foundation's budget — mouths not yet named; this circle is a placeholder for a hole" }
+      charge: "the foundation's budget — mouths not yet named; this circle is a placeholder for a hole" },
+    { id: "brandybilly", name: "Brandy & Billy", outlet: "Brandy and Billy Show · in the courtroom",
+      charge: "the refutation: slept on the concrete for an in-person seat, saw the video, posted from the room that there is no zoomed-in shot footage and no sound — breaking the “it's over” wave the day it fired" }
   ],
 
   /* ——— THE MONEY: from → to (org or person), graded, dated. Depth on the map falls out of these. ——— */
@@ -213,7 +215,15 @@ const SLOP = {
       sources: [ { label: "Baron Coleman, Ep. 142 (the cluster walk-through)", url: "https://www.youtube.com/watch?v=6ZZ_e53ZDnY" } ] },
     { date: "2026-07-11", type: "wave", grade: "documented", riders: ["sortor", "posobiec", "insiderwire", "kolvet", "tony", "eagleman", "zerohour", "allen"],
       script: "“You can see him take the shot. It's over.”",
-      label: "THE “IT'S OVER” WAVE — the day the state's enhanced video compilation (12.1) played in court, eight accounts with roughly ten million collective followers fired the same script within about two hours: “you can see him take the shot — it's over — Candace was wrong about EVERYTHING.” Set against the courtroom record of the same video as relayed in day-five coverage: played audio-only, not broadcast, described by an attendee as distant, blurry, no gun visible. No guilty plea exists. The timestamped post collage is the receipt.",
-      sources: [ { label: "@GoUncensored — the eight-post collage, timestamped", url: "https://x.com/GoUncensored/status/2075806153619960204" } ] }
+      label: "THE “IT'S OVER” WAVE — on the last day, after the cameras were off, a video was shown only to the ~14 in-person seats (packed with TPUSA influencers) at Erika Kirk's lawyer's request; the judge confirmed it would not be televised. The influencers filed out and eight accounts with roughly ten million collective followers fired the same script within about two hours: “you can see him take the shot — it's over — Candace was wrong about EVERYTHING.” What it actually is, per the transcript: the SAME surveillance footage already seen, same resolution, just zoomed in a video editor. (Note the exhibit history — 12.1 was the state's edited/circled montage the judge REJECTED as edited day one; 12.4 was the unedited version remade overnight.) No guilty plea exists.",
+      sources: [
+        { label: "@GoUncensored — the eight-post collage, timestamped", url: "https://x.com/GoUncensored/status/2075806153619960204" },
+        { label: "Ian Carroll — final recap, exhibit 12.1 vs 12.4 walked through the transcript", url: "https://www.youtube.com/watch?v=R7mdXcBfQTw" }
+      ],
+      rebuttal: {
+        grade: "documented", riders: ["brandybilly"],
+        text: "Brandy & Billy — journalists who slept on the concrete for one of the 14 in-person seats — saw the video and posted from the room: “There is no high quality zoomed-in footage showing anyone taking a shot. The video shown is the same distance as the footage of Tyler jumping off the roof… they know the video isn't going to be released publicly, so they're misrepresenting what was actually shown in court.” No sound; the face “could be anyone.” The claim of audible gunshot audio is called an outright lie.",
+        sources: [ { label: "Ian Carroll relays Brandy's in-courtroom post", url: "https://www.youtube.com/watch?v=R7mdXcBfQTw" } ]
+      } }
   ]
 };

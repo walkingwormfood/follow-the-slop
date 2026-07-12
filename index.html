@@ -110,6 +110,9 @@
   #banner .btag.money{color:var(--amber);border-color:#5c4c2a}
   #banner .btag.marker{color:var(--faint)}
   #banner a{margin-right:10px;font-size:12px}
+  .rebut{margin-top:8px;border-left:3px solid var(--slop);background:rgba(168,224,74,.06);border-radius:0 6px 6px 0;padding:7px 10px;font-size:12.5px;color:var(--ink2)}
+  .rebut .rlbl{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--slop);margin-right:6px}
+  .rebut .gk{padding:1px 7px}
 
   /* ——— the matrix ——— */
   #matrix{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto}
@@ -352,6 +355,7 @@
     const lines = [];
     inEdges(pid).forEach(e => lines.push({ grade: e.grade, text: e.note, sources: e.sources }));
     SLOP.events.filter(ev => (ev.riders||[]).includes(pid)).forEach(ev => lines.push({ grade: ev.grade, text: ev.label, sources: ev.sources }));
+    SLOP.events.filter(ev => ev.rebuttal && (ev.rebuttal.riders||[]).includes(pid)).forEach(ev => lines.push({ grade: ev.rebuttal.grade, text: "↩ REFUTES the “" + ev.script + "” wave: " + ev.rebuttal.text, sources: ev.rebuttal.sources }));
     $("rapBody").innerHTML = `<div class="rn">${esc(p.name)}</div><div class="charge">${esc(p.charge)}</div>` +
       lines.map(l => `<div class="line"><span class="gk ${esc(l.grade)}">${esc(l.grade)}</span> ${esc(l.text)}<br>` +
         (l.sources||[]).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join("") + `</div>`).join("");
@@ -405,7 +409,8 @@
     const passed = SLOP.events.filter(ev => evDay(ev) <= d);
     const cur = passed[passed.length - 1];
     $("banner").innerHTML = cur
-      ? `<span class="btag ${esc(cur.type)}">${esc(cur.type)}</span><span class="blabel">${esc(cur.date)} — ${esc(cur.label)}</span><div>${srcLinks(cur.sources)}</div>`
+      ? `<span class="btag ${esc(cur.type)}">${esc(cur.type)}</span><span class="blabel">${esc(cur.date)} — ${esc(cur.label)}</span><div>${srcLinks(cur.sources)}</div>` +
+        (cur.rebuttal ? `<div class="rebut"><span class="rlbl">↩ refuted · <span class="gk ${esc(cur.rebuttal.grade)}">${esc(cur.rebuttal.grade)}</span></span> ${esc(cur.rebuttal.text)}<div>${srcLinks(cur.rebuttal.sources)}</div></div>` : "")
       : `<span class="blabel">Drag toward the first tick — or press play and watch the machine assemble itself.</span>`;
   }
   rail.addEventListener("input", update);
