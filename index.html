@@ -69,7 +69,7 @@
   .wire.hot{opacity:1;stroke-width:3.4;filter:drop-shadow(0 0 5px rgba(168,224,74,.45))}
   .wire.faded{opacity:.06}
 
-  .rap{position:fixed;z-index:200;max-width:340px;background:#10140b;border:1px solid var(--slop);border-radius:10px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.85);display:none}
+  .rap{position:fixed;z-index:200;max-width:340px;max-height:62vh;overflow-y:auto;background:#10140b;border:1px solid var(--slop);border-radius:10px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.85);display:none}
   .rap.show{display:block}
   .rap .rn{font-family:var(--headline);font-style:italic;font-size:20px;color:var(--slop)}
   .rap .charge{font-size:12.5px;color:var(--ink2);margin:6px 0}
@@ -232,9 +232,12 @@
     const r = anchor.getBoundingClientRect();
     const rap = $("rap");
     rap.classList.add("show");
-    const top = Math.min(window.innerHeight - 60, r.bottom + 8);
-    rap.style.top = top + "px";
     rap.style.left = Math.max(8, Math.min(window.innerWidth - 356, r.left)) + "px";
+    rap.style.top = "0px";                    // reset so height measures clean
+    const h = rap.getBoundingClientRect().height;
+    const below = r.bottom + 8, above = r.top - h - 8;
+    // prefer below; flip above when it would pin to the bottom edge; last resort clamp
+    rap.style.top = (below + h <= window.innerHeight - 8 ? below : Math.max(8, above)) + "px";
   }
   $("rapClose").addEventListener("click", () => $("rap").classList.remove("show"));
   document.addEventListener("click", e => {
