@@ -31,11 +31,11 @@ const SLOP = {
 
   /* ——— THE TROUGH: who fills it ——— */
   troughs: [
-    { id: "israel",     name: "Government of Israel", sub: "MFA · via Havas Media Germany · FARA #7649" },
-    { id: "salem",      name: "Salem Media Network",  sub: "distribution · Parscale as CSO (reported)" },
-    { id: "tpusa",      name: "Turning Point USA",    sub: "post-assassination payroll" },
-    { id: "dod",        name: "U.S. Dept of Defense", sub: "digital-media consulting money" },
-    { id: "foundation", name: "“a foundation”",       sub: "named on air, never produced" }
+    { id: "israel",     name: "Government of Israel", short: "ISRAEL MFA", sub: "MFA · via Havas Media Germany · FARA #7649" },
+    { id: "salem",      name: "Salem Media Network",  short: "SALEM", sub: "distribution · Parscale as CSO (reported)" },
+    { id: "tpusa",      name: "Turning Point USA",    short: "TPUSA", sub: "post-assassination payroll" },
+    { id: "dod",        name: "U.S. Dept of Defense", short: "DOD", sub: "digital-media consulting money" },
+    { id: "foundation", name: "“a foundation”",       short: "???", sub: "named on air, never produced" }
   ],
 
   /* ——— THE WALL: (un)wanted posters ——— */
