@@ -128,6 +128,21 @@
   .dot.reported{background:var(--amber)}
   .dot.claimed{background:var(--red)}
 
+  /* ——— the ledger ——— */
+  .lrow{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+  .lrow .lhead{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+  .lrow .ldate{font-family:var(--mono);font-size:11px;color:var(--faint)}
+  .lrow .lclaim{font-size:14px;color:var(--ink);font-weight:700}
+  .lrow .lstat{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:2px 9px;white-space:nowrap}
+  .lrow .lstat.contradicted{color:var(--red);border:1px solid #5c2a2a;box-shadow:0 0 8px rgba(224,74,74,.25)}
+  .lrow .lstat.unsupported{color:var(--amber);border:1px solid #5c4c2a}
+  .lrow .lby{font-size:12.5px;color:var(--ink2);border-left:3px solid var(--line);padding:6px 10px;margin:6px 0}
+  .lrow .lriders{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:6px}
+  .lrow .lriders b{color:var(--ink2);font-weight:400;cursor:pointer}
+  .lrow .lriders b:hover{color:var(--slop)}
+  .lrow .lrcpt{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:4px}
+  #banner .btag.ledger{color:var(--red);border-color:#5c2a2a}
+
   h2.section{font-size:13px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--slop);margin:30px 0 4px;border-bottom:1px solid var(--line);padding-bottom:7px}
   .seclede{font-size:12.5px;color:var(--faint);margin:6px 0 10px}
   .toolbox{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
@@ -172,6 +187,10 @@
   <div id="matrix"></div>
 
   <div class="rap" id="rap"><button class="close" id="rapClose">✕</button><div id="rapBody"></div></div>
+
+  <h2 class="section">The ledger — claims the record answers</h2>
+  <div class="seclede">Opinions never enter this list, however ugly — "he's obviously guilty" is a take, "the video shows him taking the shot" is a checkable claim of fact. That's the line defamation law draws, and the ledger draws it in the same place: a claim lands here only when it asserts a fact AND a record answers it. <span style="color:var(--red)">Contradicted</span> — a primary record or firsthand witness says otherwise. <span style="color:var(--amber)">Unsupported</span> — the record the claim invokes doesn't contain it.</div>
+  <div id="ledger"></div>
 
   <h2 class="section">Check it yourself</h2>
   <div class="seclede">The money databases are public. Every wire above should be re-derivable by you.</div>
@@ -356,6 +375,7 @@
     inEdges(pid).forEach(e => lines.push({ grade: e.grade, text: e.note, sources: e.sources }));
     SLOP.events.filter(ev => (ev.riders||[]).includes(pid)).forEach(ev => lines.push({ grade: ev.grade, text: ev.label, sources: ev.sources }));
     SLOP.events.filter(ev => ev.rebuttal && (ev.rebuttal.riders||[]).includes(pid)).forEach(ev => lines.push({ grade: ev.rebuttal.grade, text: "↩ REFUTES the “" + ev.script + "” wave: " + ev.rebuttal.text, sources: ev.rebuttal.sources }));
+    SLOP.events.filter(ev => (ev.riders||[]).includes(pid) && (ev.claims||[]).length).forEach(ev => ev.claims.forEach(c => lines.push({ grade: "documented", text: "⚖ ON THE LEDGER (" + c.status.toUpperCase() + "): rode the wave claiming " + c.text + " — " + c.by, sources: c.sources })));
     $("rapBody").innerHTML = `<div class="rn">${esc(p.name)}</div><div class="charge">${esc(p.charge)}</div>` +
       lines.map(l => `<div class="line"><span class="gk ${esc(l.grade)}">${esc(l.grade)}</span> ${esc(l.text)}<br>` +
         (l.sources||[]).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join("") + `</div>`).join("");
@@ -409,7 +429,9 @@
     const passed = SLOP.events.filter(ev => evDay(ev) <= d);
     const cur = passed[passed.length - 1];
     $("banner").innerHTML = cur
-      ? `<span class="btag ${esc(cur.type)}">${esc(cur.type)}</span><span class="blabel">${esc(cur.date)} — ${esc(cur.label)}</span><div>${srcLinks(cur.sources)}</div>` +
+      ? `<span class="btag ${esc(cur.type)}">${esc(cur.type)}</span>` +
+        ((cur.claims||[]).length ? `<span class="btag ledger">⚖ ${cur.claims.length} claim${cur.claims.length>1?"s":""} on the ledger</span>` : "") +
+        `<span class="blabel">${esc(cur.date)} — ${esc(cur.label)}</span><div>${srcLinks(cur.sources)}</div>` +
         (cur.rebuttal ? `<div class="rebut"><span class="rlbl">↩ refuted · <span class="gk ${esc(cur.rebuttal.grade)}">${esc(cur.rebuttal.grade)}</span></span> ${esc(cur.rebuttal.text)}<div>${srcLinks(cur.rebuttal.sources)}</div></div>` : "")
       : `<span class="blabel">Drag toward the first tick — or press play and watch the machine assemble itself.</span>`;
   }
@@ -444,6 +466,26 @@
       `<td class="n">${n}</td></tr>`).join("");
     $("matrix").innerHTML = `<table>${head}${body}</table>`;
     $("matrix").addEventListener("click", e => {
+      const c = e.target.closest("[data-rap]");
+      if(c) showRap(c.dataset.rap, c);
+    });
+  })();
+
+  /* ——— the ledger: factual claims, answered by the record ——— */
+  (function buildLedger(){
+    const rows = [];
+    SLOP.events.filter(ev => (ev.claims||[]).length).forEach(ev => ev.claims.forEach(c => rows.push({ ev, c })));
+    rows.sort((a, b) => a.ev.date.localeCompare(b.ev.date));
+    const nameOf = pid => (SLOP.people.find(p => p.id === pid) || {}).name || pid;
+    $("ledger").innerHTML = rows.map(({ ev, c }) =>
+      `<div class="lrow">` +
+        `<div class="lhead"><span class="ldate">${esc(ev.date)}</span><span class="lstat ${esc(c.status)}">${esc(c.status)}</span><span class="lclaim">${esc(c.text)}</span></div>` +
+        `<div class="lby">${esc(c.by)}</div>` +
+        `<div>${srcLinks(c.sources)}</div>` +
+        `<div class="lriders">wave: “${esc(ev.script||"")}” · mouths: ${(ev.riders||[]).map(r => `<b data-rap="${esc(r)}">${esc(nameOf(r))}</b>`).join(", ")}</div>` +
+        ((ev.receipts||[]).length ? `<div class="lrcpt">receipts: ${ev.receipts.map(r => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(nameOf(r.rider))} · ${esc(r.at)} ↗</a>`).join(" · ")}</div>` : "") +
+      `</div>`).join("") || `<div class="seclede">Nothing on the ledger yet — the bar is deliberately high.</div>`;
+    $("ledger").addEventListener("click", e => {
       const c = e.target.closest("[data-rap]");
       if(c) showRap(c.dataset.rap, c);
     });

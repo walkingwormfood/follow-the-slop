@@ -6,6 +6,17 @@
  *   claimed    — somebody said it on air; receipts not shown
  * Repeat a claim at its grade, never above it.
  *
+ * THE LEDGER: waves may carry claims[] — specific FACTUAL assertions the riders made,
+ * each with a status and the record that answers it:
+ *   contradicted — a primary record or firsthand witness directly contradicts the assertion
+ *   unsupported  — the record the assertion invokes does not contain it
+ * Opinions never enter the ledger, however ugly ("he's obviously guilty" is not a claim —
+ * "the video shows him taking the shot" is). Fact vs. opinion is the line defamation law
+ * draws (Milkovich v. Lorain Journal), and the ledger draws it in the same place: a claim
+ * enters only when it asserts a checkable fact AND a record answers it.
+ * receipts[]: individual timestamped posts, pulled from X's own syndication CDN
+ * (cdn.syndication.twimg.com/tweet-result?id=<ID>&token=a — text, author, exact UTC stamp).
+ *
  * THE PICTURE: the slop FALLS, then RADIATES. Money enters at the top and descends
  * through the org tiers (depth = money distance from the source); the mouths hang at
  * the bottom of their chains; waves blip outward from the mouths as the timeline
@@ -164,6 +175,17 @@ const SLOP = {
         { label: "Musk's post, Sept 10, 2025", url: "https://x.com/elonmusk/status/1965859343351558352" },
         { label: "The Hill", url: "https://thehill.com/policy/technology/5502535-elon-musk-charlie-kirk-death/" },
         { label: "AP/NBC FACT FOCUS — the flood, documented", url: "https://www.nbcphiladelphia.com/news/politics/fact-focus-assassination-of-charlie-kirk-prompts-flood-of-false-and-misleading-claims-online/4268659/" }
+      ],
+      receipts: [
+        { rider: "musk", id: "1965859343351558352", at: "2025-09-10T19:26:06Z",
+          text: "The Left is the party of murder",
+          url: "https://x.com/elonmusk/status/1965859343351558352" }
+      ],
+      claims: [
+        { text: "“The Left” killed Charlie Kirk — stated as fact, hours after the shooting.",
+          status: "unsupported",
+          by: "No suspect existed when the claim fired (Musk's post: 7:26 p.m. UTC, Sept 10). Robinson was not in custody until Sept 11–12, and no evidence about any shooter's politics existed. The fact-check wires documented the flood in real time.",
+          sources: [ { label: "AP/NBC FACT FOCUS", url: "https://www.nbcphiladelphia.com/news/politics/fact-focus-assassination-of-charlie-kirk-prompts-flood-of-false-and-misleading-claims-online/4268659/" } ] }
       ] },
     { date: "2025-09-16", type: "wave", grade: "documented", riders: ["headlines"],
       script: "“He confessed — case closed.”",
@@ -172,6 +194,15 @@ const SLOP = {
         { label: "Utah News Dispatch (Gray's hedge)", url: "https://utahnewsdispatch.com/2025/09/16/charges-filed-tyler-robinson-death-penalty-accused-of-killing-charlie-kirk/" },
         { label: "PBS — the headline", url: "https://www.pbs.org/newshour/nation/as-officials-searched-for-charlie-kirks-shooter-suspect-confessed-to-his-partner-prosecutor-says" },
         { label: "ABC — the headline", url: "https://abcnews.com/US/tyler-robinson-set-face-formal-charges-shooting-death/story?id=125614396" }
+      ],
+      claims: [
+        { text: "“Robinson confessed” — run as settled fact in the same-day headline wall.",
+          status: "unsupported",
+          by: "The prosecutor's own charging-day statement said a judge would decide whether the statements constituted a confession. Ten months later, the preliminary hearing closed with no direct confession in evidence: neither parent testified, the family friend was never put on the stand, and the reported Discord messages were never entered or mentioned.",
+          sources: [
+            { label: "Utah News Dispatch — Gray's hedge, same day", url: "https://utahnewsdispatch.com/2025/09/16/charges-filed-tyler-robinson-death-penalty-accused-of-killing-charlie-kirk/" },
+            { label: "Ian Carroll — the hearing record on confessions, walked through", url: "https://www.youtube.com/watch?v=R7mdXcBfQTw" }
+          ] }
       ] },
     { date: "2025-09-17", type: "wave", grade: "reported", riders: ["ackman", "shapiro", "pool"],
       script: "“She's fabricating. There was no intervention.”",
@@ -224,6 +255,19 @@ const SLOP = {
         grade: "documented", riders: ["brandybilly"],
         text: "Brandy & Billy — journalists who slept on the concrete for one of the 14 in-person seats — saw the video and posted from the room: “There is no high quality zoomed-in footage showing anyone taking a shot. The video shown is the same distance as the footage of Tyler jumping off the roof… they know the video isn't going to be released publicly, so they're misrepresenting what was actually shown in court.” No sound; the face “could be anyone.” The claim of audible gunshot audio is called an outright lie.",
         sources: [ { label: "Ian Carroll relays Brandy's in-courtroom post", url: "https://www.youtube.com/watch?v=R7mdXcBfQTw" } ]
-      } }
+      },
+      claims: [
+        { text: "“High-quality / 4K zoomed-in footage shows Robinson taking the shot.”",
+          status: "contradicted",
+          by: "Two journalists who were in the room for the showing posted the same day: “There is no high quality zoomed-in footage showing anyone taking a shot… the same distance as the footage of Tyler jumping off the roof.” The hearing transcript agrees: the video is the same surveillance footage at the same resolution, zoomed in a video editor — and the edited montage version (exhibit 12.1) is the one the judge REJECTED day one as edited. The riders claiming otherwise were describing a video they had just personally watched, to an audience they knew could never check — “they know the video isn't going to be released publicly.”",
+          sources: [
+            { label: "Brandy & Billy, posted from the courtroom", url: "https://www.youtube.com/watch?v=R7mdXcBfQTw" },
+            { label: "Hearing transcript — the exhibit colloquy (12.1/12.4)", url: "https://www.youtube.com/watch?v=R7mdXcBfQTw" }
+          ] },
+        { text: "“You could hear the gunshot” on the courtroom video.",
+          status: "contradicted",
+          by: "Per the in-room witnesses: there is no sound on the video at all. “People are saying, oh, there was sound, you could hear the gunshot — that is an absolute lie.”",
+          sources: [ { label: "Brandy & Billy, in-room account", url: "https://www.youtube.com/watch?v=R7mdXcBfQTw" } ] }
+      ] }
   ]
 };
