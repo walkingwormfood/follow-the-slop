@@ -103,7 +103,9 @@ const SLOP = {
     { id: "network",   name: "the unnamed network", outlet: "“the American market”",
       charge: "the foundation's budget — mouths not yet named; this circle is a placeholder for a hole" },
     { id: "brandybilly", name: "Brandy & Billy", outlet: "Brandy and Billy Show · in the courtroom",
-      charge: "the refutation: slept on the concrete for an in-person seat, saw the video, posted from the room that there is no zoomed-in shot footage and no sound — breaking the “it's over” wave the day it fired" }
+      charge: "the refutation: slept on the concrete for an in-person seat, saw the video, posted from the room that there is no zoomed-in shot footage and no sound — breaking the “it's over” wave the day it fired" },
+    { id: "megynkelly", name: "Megyn Kelly", outlet: "The Megyn Kelly Show (SiriusXM)",
+      charge: "guilt-narrative amplifier and TPUSA friend — “now that I've seen the video… this guy did it, everybody relax”; “I want him dead… I will be gleeful on the day it is carried out” (Dec 2025); and on-air alongside Posobiec: “Tyler Robinson is not human… a sick animal.” Slots into the “it's over” wave — pending her primary timestamped clip before she's added as a dated rider." }
   ],
 
   /* ——— THE MONEY: from → to (org or person), graded, dated. Depth on the map falls out of these. ——— */
