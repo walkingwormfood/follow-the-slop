@@ -49,7 +49,9 @@ const SLOP = {
     { id: "havas",      name: "Havas Media Germany",  sub: "contracting intermediary" },
     { id: "clocktower", name: "Clock Tower X LLC",    sub: "FARA #7649 · registered Sept 18, 2025" },
     { id: "salem",      name: "Salem Media Network",  sub: "distribution · Parscale as CSO (reported)" },
-    { id: "kirkshow",   name: "The Charlie Kirk Show", sub: "Salem Podcast Network" }
+    { id: "kirkshow",   name: "The Charlie Kirk Show", sub: "Salem Podcast Network" },
+    { id: "bridges",    name: "Bridges Partners LLC",  sub: "FARA #7652 · Sept 26, 2025 · the “Esther Project”" },
+    { id: "showfaith",  name: "Show Faith By Works LLC", sub: "FARA #7653 · Sept 27, 2025 · church geofencing" }
   ],
 
   /* ——— PEOPLE: circles. mugs/<id>.jpg gives them a face; initials otherwise. ——— */
@@ -115,6 +117,20 @@ const SLOP = {
       sources: [
         { label: "DOJ FARA database (reg. 7649)", url: "https://efile.fara.gov/ords/fara/f?p=1381:1" },
         { label: "The Hill", url: "https://thehill.com/policy/international/5528458-brad-parscale-israel-foreign-agent/" }
+      ] },
+    { from: "havas", to: "bridges", grade: "documented", date: "2025-09-26",
+      note: "FARA #7652 (Bridges Partners LLC, Uri Steinberg & Yair Levi), filed Sept 26, 2025 — $900K via Havas for the “Esther Project”: an influencer network paying ~14–18 anonymous US creators an estimated ~$7,000/post for pro-Israel content, Jun–Nov 2025. Public Citizen filed a FARA complaint asking DOJ to compel the influencer names. Same Israel→Havas pipeline as Clock Tower X, filed 8 days later.",
+      sources: [
+        { label: "DOJ FARA eFile — reg. #7652 (Exhibit A/B)", url: "https://efile.fara.gov/docs/7652-Exhibit-AB-20250926-1.pdf" },
+        { label: "The American Conservative — plans to inject pro-Israel messaging into Salem", url: "https://www.theamericanconservative.com/document-reveals-plans-to-inject-pro-israel-beliefs-into-conservative-media-network-salem-media/" },
+        { label: "Public Citizen — FARA complaint on the paid influencers", url: "https://www.citizen.org/article/fara-complaint-alleges-us-based-social-media-influencers-are-acting-as-agents-of-israel/" }
+      ] },
+    { from: "havas", to: "showfaith", grade: "documented", date: "2025-09-27",
+      note: "FARA #7653 (Show Faith By Works LLC, registrant Chad Schnitger — head of the CA chapter of Ralph Reed's Faith & Freedom Coalition), filed Sept 27, 2025 — $4.1M via Havas for a church-geofencing campaign targeting 303 megachurches + 39 Christian colleges in the western US (a mobile museum, pro-Israel geofencing/digital). Same Israel→Havas pipeline as Clock Tower X.",
+      sources: [
+        { label: "DOJ FARA eFile — reg. #7653 registration statement", url: "https://efile.fara.gov/docs/7653-Registration-Statement-20250927-1.pdf" },
+        { label: "Evangelical Dark Web — Show Faith by Works exposed", url: "https://evangelicaldarkweb.org/2025/10/07/deep-dive-into-israeli-influence-operation-targeting-christians-show-faith-by-works-exposed/" },
+        { label: "Al Jazeera — Israel's US PR firms framing Gaza", url: "https://www.aljazeera.com/news/2025/10/30/spinning-genocide-how-israel-is-using-us-pr-firms-to-frame-its-gaza-war" }
       ] },
     { from: "havas", to: "clocktower", grade: "documented", date: "2025-09-18",
       note: "FARA registration #7649, filed Sept 18, 2025 — eight days after Kirk was killed. $9M disclosed ($1.5M/month). Scope: AI content, SEO, ≥80% Gen-Z targeting, and integration with Salem Media Network properties.",
